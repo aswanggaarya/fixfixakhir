@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Agentiket.com - Flights</title>
+  <title>Agentiket.com - Pesawat</title>
   <link rel="icon" href="<?=base_url('assets/')?>img/logo.png" type="image/png">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -39,54 +39,6 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
     
-    <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-          <!-- Sidebar - Brand -->
-          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=base_url('user/')?>">
-              <img src="<?=base_url('assets/')?>img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-              Agentiket.com
-          </a>
-
-          <!-- Divider -->
-          <hr class="sidebar-divider my-0">
-          <!-- Divider -->
-          <hr class="sidebar-divider">
-
-          <!-- Heading -->
-          <div class="sidebar-heading">
-            Menu
-          </div>
-
-          <!-- Nav Item - Charts -->
-          <li class="nav-item active">
-            <a class="nav-link" href="<?=base_url('user/flights')?>">
-              <i class="fas fa-plane"></i>
-              <span>Flights</span></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="<?=base_url('user/trains')?>">
-              <i class="fas fa-subway"></i>
-              <span>Trains</span></a>
-          </li>
-
-          <!-- Divider -->
-          <hr class="sidebar-divider d-none d-md-block">
-
-          <li class="nav-item">
-            <a class="nav-link" href="<?=base_url('auth/logout');?>" data-toggle="modal" data-target="#logoutModal">
-              <i class="fas fa-sign-out-alt"></i>
-              <span>Logout</span>
-            </a>
-          </li>
-          <!-- Sidebar Toggler (Sidebar) -->
-          <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-          </div>
-
-        </ul>
-    <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -101,6 +53,11 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
+
+          <nav class="navbar navbar-light">
+            <img src="<?=base_url('assets/')?>img/logo.png" width="30" height="30" class="d-inline-block align-top" href="<?=base_url('user/flights')?>">
+            <a class="navbar-brand" href="<?=base_url('user/flights')?>" style="color: #434343; margin-top: 10%; font-size: 16px;"><p><b>AGENTIKET.COM</b></p></a>
+          </nav>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -135,7 +92,7 @@
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
-                  Transaction History
+                  Riwayat Transaksi
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="mr-3">
@@ -174,24 +131,23 @@
               </div>
             </li>
 
+            <li class="nav-item">
+              <a class="nav-link" href="<?=base_url('user/pagekonfirmasipes');?>"><small>Status Tiket Pesawat</small></a>
+            </li>
             
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $penumpang['namapenumpang']; ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['namauser']; ?></span>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  MyProfile
-                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?=base_url('auth/logout');?>" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  Keluar
                 </a>
               </div>
             </li>
@@ -213,41 +169,37 @@
                 <div class="card-body">
                   <div class="chart-area">
                     
-                    <h3>list of Plane Routes</h3>
+                    <h3>Daftar Rute Pesawat</h3>
                     <table class="table">
                       <thead>
                         <tr>
-                          <th scope="col">No</th>
-                          <th scope="col">Initial Route</th>
-                          <th scope="col">Final Route</th>
-                          <th scope="col">Departure</th>
-                          <th scope="col">Arrive</th>
-                          <th scope="col">Airline</th>
-                          <th scope="col">Price</th>
+                          <th scope="col">Maskapai</th>
+                          <th scope="col">Rute Awal</th>
+                          <th scope="col">Rute Akhir</th>
+                          <th scope="col">Berangkat</th>
+                          <th scope="col">Tiba</th>
+                          <th scope="col">Harga</th>
                           <th scope="col"></th>
                         </tr>
                       </thead>
                       <?php 
-                        $no = 1;
                         foreach($rutepesawat as $k){ 
                         ?>
                         <tr>
-                          <td><?php echo $no++ ?></td>
+                          <td><b><?php echo $k->maskapai ?></b></td>
                           <td><?php echo $k->ruteawal ?></td>
                           <td><?php echo $k->ruteakhir ?></td>
                           <td><?php echo $k->jamberangkat ?></td>
                           <td><?php echo $k->jamtiba ?></td>
-                          <td><?php echo $k->maskapai ?></td>
-                          <td><?php echo $k->harga ?></td>
+                          <td><b style="font-size: 19px; color: #3F9FD5;">Rp <?php echo number_format($k->harga, 0,',','.') ?></b><b style="font-size: 15px;"> / org</b></td>
+
                           <td>
                             <?php
-                              $ruteawal = $_GET['ruteawal'];
-                              $ruteakhir = $_GET['ruteakhir'];
                               $date = $_GET['date'];
                               $passenger = $_GET['penumpang'];
                             ?>
-                            <a href='<?= base_url("user/penflight?penumpang={$passenger}&&ruteawal={$ruteawal}&&ruteakhir={$ruteakhir}&&date={$date}"); ?>'>
-                              <button type="button" class="btn btn-warning">Select</button>
+                            <a href='<?= base_url("user/penflight/{$k->idrutepesawat}?penumpang={$passenger}&&date={$date}"); ?>'>
+                              <button type="button" class="btn btn-warning" style="margin-top: -5%;">Pilih</button>
                             </a>
                           </td>
                         </tr>

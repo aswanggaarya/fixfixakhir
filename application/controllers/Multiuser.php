@@ -56,9 +56,9 @@ class Multiuser extends CI_Controller {
 				];
 				$this->session->set_userdata($data);
 				if ($petugas['idlevel'] == "1") {
-					redirect('admin/entri');	
+					redirect('admin/datapetugas');	
 				} else{
-					redirect('petugas');
+					redirect('petugas');// kasir
 				}
 			} else {
 				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!</div>');

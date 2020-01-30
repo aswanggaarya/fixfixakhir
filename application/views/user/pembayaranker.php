@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Agentiket.com - Kereta</title>
+  <title>Agentiket.com - Train</title>
   <link rel="icon" href="<?=base_url('assets/')?>img/logo.png" type="image/png">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -54,8 +54,8 @@
           </button>
 
           <nav class="navbar navbar-light">
-            <img src="<?=base_url('assets/')?>img/logo.png" width="30" height="30" class="d-inline-block align-top" href="<?=base_url('user/trains')?>">
-            <a class="navbar-brand" href="<?=base_url('user/trains')?>" style="color: #434343; margin-top: 10%; font-size: 16px;"><p><b>AGENTIKET.COM</b></p></a>
+            <img src="<?=base_url('assets/')?>img/logo.png" width="30" height="30" class="d-inline-block align-top" href="<?=base_url('user/flights')?>">
+            <a class="navbar-brand" href="<?=base_url('user/flights')?>" style="color: #434343; margin-top: 10%; font-size: 16px;"><p><b>AGENTIKET.COM</b></p></a>
           </nav>
 
           <!-- Topbar Navbar -->
@@ -91,7 +91,7 @@
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
-                  Alerts Center
+                  Transaction History
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="mr-3">
@@ -131,9 +131,9 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="<?=base_url('user/pagekonfirmasiker');?>"><small>Status Tiket Kereta</small></a>
+              <a class="nav-link" href="<?=base_url('user/konfirmasiker');?>"><small>Status Tiket Kereta</small></a>
             </li>
-
+            
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
@@ -143,10 +143,14 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  MyProfile
+                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?=base_url('auth/logout');?>" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Keluar
+                  Logout
                 </a>
               </div>
             </li>
@@ -157,140 +161,37 @@
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <div class="container">
 
-          <div class="row">
+          <div class="row justify-content-center">
 
             <div class="col-xl-8 col-lg-7">
 
-              <!-- Area Chart -->
-              <form action="<?= base_url('user/pesankereta'); ?>" method="post">
-                <input type="hidden" name="penumpang" value="<?= $_GET['penumpang'] ?>">
-                <input type="hidden" name="idrutekereta" value="<?= $idrutekereta ?>">
-                <input type="hidden" name="harga" value="<?= $info->harga ?>">
-
-                <!-- Form Pemesan -->
+              <!-- Area Chart --> 
 
                 <div class="card shadow mb-4">
                   <div class="card-body">
-                    <div class="form-grup">
-                      <b><label>Detail Kontak</label></b>
-                    </div>
-
-                    <div class="row">
-                      <div class="col" style="margin-top: 1%;">
-                        <label>Nama</label>
-                        <input type="text" class="form-control" name="namapemesan" required>
+                    <div class="card-header text-center"><h5><b>Info Pembayaran</b></h5></div>
+                    <div class="row" style="margin-top: 2%;">
+                      <div class="col">
+                        <p class="text-left" style="color: #434343;">Total Pembayaran</p>
                       </div>
-                      <div class="col" style="margin-top: 1%;">
-                        <label>Email</label>
-                        <input type="text" class="form-control" name="email" required>
+                      <div class="col">
+                        <p class="text-right" style="color: orange;"><b>Rp <?= number_format($this->session->flashdata('total'), 0,',','.') ?></b></p>
                       </div>
                     </div>
-
-                    <div class="form-grup" style="margin-top: 1%;">
-                      <label>Alamat</label>
-                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="alamat" required></textarea>
+                    <hr style="margin-top: -0.5%;">
+                    <p class="text-center" style="margin-bottom: -0.3%">Kode Pembayaran</p>
+                    <h1 class="text-center" style="color: orange;"><?= $this->session->flashdata('nomorpembayaran') ?></h1>
+                    
+                    <div class="card-footer" style="margin-bottom: -1%;">
+                      <p class="mt-2 text-center" style="color: #434343; margin-bottom: -0.3%"><img src="<?=base_url('assets/')?>img/bri.png" width="50" height="35"> <small>a/n PT.Agen Tiket Indonesia</small> <b>766 776 677 666</b></p>
+                      <p class="text-center mt-4" style="margin-bottom: -1%;">Jika sudah melakukan pembayaran, <a href="<?=base_url('user/konfirmasipes');?>">Klik Disini</a></p>
                     </div>
                   </div>
                 </div>
-                <?php  
-                  $jmlpenumpang = $_GET['penumpang'];
-                  $no = 1;
-                  for ($i=1; $i <= $jmlpenumpang ; $i++) { 
-                ?>        
-                  <div class="card shadow mb-4">
-                    <div class="card-body">
-                      <div class="form-grup">
-                        <b><label>Penumpang <?php echo $no++; ?></label></b>
-                      </div>
-
-                      <div class="form-grup">
-                        <label style="color: orange;">No. Identitas dari KTP/passport/SIM</label><br>
-                        <label>No. Identitas</label>
-                        <input type="text" class="form-control" name="noidentitas<?= $i ?>" required>
-                      </div> 
-
-                      <div class="form-grup" style="margin-top: 1%;">
-                        <label>Nama</label>
-                        <input type="text" class="form-control" name="namapenumpang<?= $i ?>" required>
-                      </div>
-
-                      <div class="row">
-                        <div class="col" style="margin-top: 1%;">
-                          <label>Gerbong</label>
-                          <select class="custom-select" name="gerbong<?= $i ?>" id="inputGroupSelect01">
-                            <option selected>-- Pilih Gerbong --</option>
-                            <option value="1">Gerbong 1</option>
-                            <option value="2">Gerbong 2</option>
-                            <option value="3">Gerbong 3</option>
-                          </select>
-                        </div>
-                        <div class="col" style="margin-top: 1%;">
-                          <label>Kursi</label>
-                          <input type="text" class="form-control" name="kursi<?= $i ?>" placeholder="Contoh '1A'" required>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                <?php } ?>
-                  <button type="submit" class="btn btn-warning" style="margin-bottom: 2%; width: 16%;">Lanjutkan</button>    
-              </form>
-
-            </div>
-            <div class="col-xl-4">
-
-              <div class="card shadow">
-                <div class="card" style="width: 100%;">
-                  <div class="card-header">
-                    <p>Dari</p>
-                    <p><b><?= $info->ruteawal ?></b></p>
-                    <p>Menuju</p>
-                    <p><b><?= $info->ruteakhir ?></b></p>  
-                  </div>
-                  <div class="card-body">
-                    <p>Berangkat • <?php $date = $_GET['date']; echo "<b>".date('d F Y', strtotime($date))."</b>";?> </p>
-                    <p>Kereta • <b><?= $info->kereta ?></b></p>
-                  </div>
-                  <div class="card-footer card-header">
-                    <p style="margin-bottom: -0.5%;">Total Harga dari <b><?= $jmlpenumpang ?> Orang</b></p>
-                  </div>
-                  <div class="card-body text-right">
-                    <b style="color: orange;">Rp <?php echo number_format($info->harga*$jmlpenumpang , 0,',','.') ?></b>
-                  </div>
-                </div>
-
-              </div>
-              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="<?=base_url('assets/')?>img/gerbong1.png" class="d-block w-100" alt="Gerbong 1">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="<?=base_url('assets/')?>img/gerbong2.png" class="d-block w-100" alt="Gerbong 2">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="<?=base_url('assets/')?>img/gerbong3.png" class="d-block w-100" alt="Gerbong 3">
-                  </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </div>  
               
             </div>
-            
           </div>
           
 
@@ -301,13 +202,13 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <!-- <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; AGENTIKET.COM 2019</span>
           </div>
         </div>
-      </footer>
+      </footer> -->
       <!-- End of Footer -->
 
     </div>

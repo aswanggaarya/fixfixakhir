@@ -38,55 +38,6 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
-    
-    <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-          <!-- Sidebar - Brand -->
-          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=base_url('user/')?>">
-              <img src="<?=base_url('assets/')?>img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-              Agentiket.com
-          </a>
-
-          <!-- Divider -->
-          <hr class="sidebar-divider my-0">
-          <!-- Divider -->
-          <hr class="sidebar-divider">
-
-          <!-- Heading -->
-          <div class="sidebar-heading">
-            Menu
-          </div>
-
-          <!-- Nav Item - Charts -->
-          <li class="nav-item active">
-            <a class="nav-link" href="<?=base_url('user/flights')?>">
-              <i class="fas fa-plane"></i>
-              <span>Flights</span></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="<?=base_url('user/trains')?>">
-              <i class="fas fa-subway"></i>
-              <span>Trains</span></a>
-          </li>
-
-          <!-- Divider -->
-          <hr class="sidebar-divider d-none d-md-block">
-
-          <li class="nav-item">
-            <a class="nav-link" href="<?=base_url('auth/logout');?>" data-toggle="modal" data-target="#logoutModal">
-              <i class="fas fa-sign-out-alt"></i>
-              <span>Logout</span>
-            </a>
-          </li>
-          <!-- Sidebar Toggler (Sidebar) -->
-          <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-          </div>
-
-        </ul>
-    <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -101,6 +52,11 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
+
+          <nav class="navbar navbar-light">
+            <img src="<?=base_url('assets/')?>img/logo.png" width="30" height="30" class="d-inline-block align-top" href="<?=base_url('user/flights')?>">
+            <a class="navbar-brand" href="<?=base_url('user/flights')?>" style="color: #434343; margin-top: 10%; font-size: 16px;"><p><b>AGENTIKET.COM</b></p></a>
+          </nav>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -174,13 +130,16 @@
               </div>
             </li>
 
+            <li class="nav-item">
+              <a class="nav-link" href="<?=base_url('user/pagekonfirmasipes');?>"><small>Status Tiket Pesawat</small></a>
+            </li>
             
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $penumpang['namapenumpang']; ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['namauser']; ?></span>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -209,61 +168,92 @@
             <div class="col-xl-8 col-lg-7">
 
               <!-- Area Chart -->
-              <form>
+              <form action="<?= base_url('user/pesanpesawat'); ?>" method="post">
+                <input type="hidden" name="penumpang" value="<?= $_GET['penumpang'] ?>">
+                <input type="hidden" name="idrutepesawat" value="<?= $idrutepesawat ?>">
+                <input type="hidden" name="harga" value="<?= $info->harga ?>">
+
+                <!-- Form Pemesan -->
+
+                <div class="card shadow mb-4">
+                  <div class="card-body">
+                    <div class="form-grup">
+                      <b><label>Detail Kontak</label></b>
+                    </div>
+
+                    <div class="row">
+                      <div class="col" style="margin-top: 1%;">
+                        <label>Nama</label>
+                        <input type="text" class="form-control" name="namapemesan" required>
+                      </div>
+                      <div class="col" style="margin-top: 1%;">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email" required>
+                      </div>
+                    </div>
+
+                    <div class="form-grup" style="margin-top: 1%;">
+                      <label>Alamat</label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="alamat" required></textarea>
+                    </div>
+                  </div>
+                </div>
                 <?php  
                   $jmlpenumpang = $_GET['penumpang'];
                   $no = 1;
-                  for ($i=0; $i < $jmlpenumpang ; $i++) { 
+                  for ($i=1; $i <= $jmlpenumpang ; $i++) { 
                 ?>        
                   <div class="card shadow mb-4">
                     <div class="card-body">
                       <div class="form-grup">
-                        <b><label>Passenger <?php echo $no++; ?></label></b>
+                        <b><label>Penumpang <?php echo $no++; ?></label></b>
                       </div>
 
                       <div class="form-grup">
-                        <label style="color: orange;">No. Identity as on ID card/passport/driving license</label><br>
-                        <label>No. Identity</label>
-                        <input type="text" class="form-control" name="noidentitas">
+                        <label style="color: orange;">No. Identitas dari KTP/passport/SIM</label><br>
+                        <label>No. Identitas</label>
+                        <input type="text" class="form-control" name="noidentitas<?= $i ?>" required>
                       </div> 
 
                       <div class="form-grup" style="margin-top: 1%;">
-                        <label>Full Name</label>
-                        <input type="text" class="form-control" name="namapenumpang">
+                        <label>Nama</label>
+                        <input type="text" class="form-control" name="namapenumpang<?= $i ?>" required>
+                      </div>
+
+                      <div class="form-grup" style="margin-top: 1%; width: 50%;">
+                        <label>Kursi</label>
+                        <input type="text" class="form-control" name="kursi<?= $i ?>" placeholder="Contoh '7A'" required>
                       </div>
                     </div>
                   </div>
                 <?php } ?>
-                  <input type="submit" class="btnadd btn btn-warning" name="btnadd" value="Continue" style="margin-bottom: 2%; width: 16%;">     
+                  <button type="submit" class="btn btn-warning" style="margin-bottom: 2%; width: 16%;">Lanjutkan</button>  
               </form>
-                  
-              
-
             </div>
+
             <div class="col-xl-4">
 
               <div class="card shadow">
                 <div class="card" style="width: 100%;">
                   <div class="card-header">
-                    <?php  
-                      $ruteawal = $_GET['ruteawal'];
-                      $ruteakhir = $_GET['ruteakhir'];
-                      echo "<b>".$ruteawal."</b>";
-                      echo " <i class='fas fa-arrow-right' style='color: #30c5f7;'></i> ";
-                      echo "<b>".$ruteakhir."</b>";
-                    ?>  
+                    <p>Dari</p>
+                    <p><b><?= $info->ruteawal ?></b></p>
+                    <p>Menuju</p>
+                    <p><b><?= $info->ruteakhir ?></b></p>
                   </div>
                   <div class="card-body">
-                    <p>Departure • <?php $date = $_GET['date']; echo "<b>".$date."</b>";?></p>
+                    <p>Berangkat • <?php $date = $_GET['date']; echo "<b>".date('d F Y', strtotime($date))."</b>";?></p>
+                    <p>Maskapai • <b><?= $info->maskapai ?></b></p>
                   </div>
                   <div class="card-footer card-header">
-                    <p style="margin-bottom: -0.5%;">Total Price for <b><?= $jmlpenumpang ?> Persons</b></p>
+                    <p style="margin-bottom: -0.5%;">Total Harga dari <b><?= $jmlpenumpang ?> Orang</b></p>
                   </div>
-                  <div class="card-body">
-                    <b style="padding-left: 14vw; color: orange;">Rp. 1.000.000</b>
+                  <div class="card-body text-right">
+                    <b style="color: orange;">Rp <?php echo number_format($info->harga*$jmlpenumpang , 0,',','.') ?></b>
                   </div>
                 </div>
-              </div>  
+              </div>
+              <img src="<?=base_url('assets/')?>img/bangkupesawat.jpg" width="415" height="110">  
               
             </div>
           </div>

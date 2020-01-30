@@ -53,6 +53,22 @@
             Menu
           </div>
 
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item active">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+              <i class="fas fa-save"></i>
+              <span>Data</span>
+            </a>
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?=base_url('admin/datapetugas')?>">Pegawai</a>
+                <a class="collapse-item" href="<?=base_url('admin/datarutekereta')?>">Rute Kereta</a>
+                <a class="collapse-item" href="<?=base_url('admin/datarutepesawat')?>">Rute Pesawat</a>
+                <a class="collapse-item active" href="<?=base_url('admin/datauser')?>">User</a>
+              </div>
+            </div>
+          </li>
+
           <!-- Nav Item - Charts -->
           <li class="nav-item active">
             <a class="nav-link" href="<?=base_url('admin/entri')?>">
@@ -310,16 +326,17 @@
                     
                     <h3>list of Train Routes</h3>
                     <button type="button" class="btn btn-primary" style="margin-bottom: 2%;" data-toggle="modal" data-target="#adddatakereta">Add Data</button>
-                    <table class="table col-lg-12">
+                    <table class="table" style="margin-left: -3%; width: 180vh;">
                       <thead>
                         <tr>
                           <th scope="col">No</th>
-                          <th scope="col">Rute Awal</th>
-                          <th scope="col">Rute Akhir</th>
-                          <th scope="col">Jam Berangkat</th>
-                          <th scope="col">Jam Tiba</th>
-                          <th scope="col">Harga</th>
-                          <th scope="col">Action</th>
+                          <th scope="col">Initial Route</th>
+                          <th scope="col">Final Route</th>
+                          <th scope="col">Departure</th>
+                          <th scope="col">Arrive</th>
+                          <th scope="col">Train</th>
+                          <th scope="col">Price</th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <?php 
@@ -332,6 +349,7 @@
                           <td><?php echo $k->ruteakhir ?></td>
                           <td><?php echo $k->jamberangkat ?></td>
                           <td><?php echo $k->jamtiba ?></td>
+                          <td><?php echo $k->kereta ?></td>
                           <td><?php echo $k->harga ?></td>
                           <td>
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updatedatakereta<?php echo $k->idrutekereta ?>">Update</button>
@@ -358,23 +376,27 @@
                       <form action="<?php echo base_url(). 'admin/tambahkereta'; ?>" method="post" id="form-barang">
                         <div class="modal-body">
                           <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Rute Awal</b></p>
+                            <p style="color: black; margin-bottom: -0.3%;"><b>Initial Route</b></p>
                             <input type="text" class="form-control" id="ruteawal" name="ruteawal">
                           </div>
                           <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Rute Akhir</b></p>
+                            <p style="color: black; margin-bottom: -0.3%;"><b>Final Route</b></p>
                             <input type="text" class="form-control" id="ruteakhir" name="ruteakhir">
                           </div>
                           <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Jam Berangkat</b></p>
+                            <p style="color: black; margin-bottom: -0.3%;"><b>Departure</b></p>
                             <input type="time" class="form-control" id="jamberangkat" name="jamberangkat">
                           </div>
                           <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Jam Tiba</b></p>
+                            <p style="color: black; margin-bottom: -0.3%;"><b>Arrive</b></p>
                             <input type="time" class="form-control" id="jamtiba" name="jamtiba">
                           </div>
                           <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Harga</b></p>
+                            <p style="color: black; margin-bottom: -0.3%;"><b>Train</b></p>
+                            <input type="text" class="form-control" id="kereta" name="kereta">
+                          </div>
+                          <div class="form-group">
+                            <p style="color: black; margin-bottom: -0.3%;"><b>Price</b></p>
                             <input type="number" class="form-control" id="harga" name="harga">
                           </div>
                         </div>
@@ -432,24 +454,28 @@
                           <form action="<?php echo base_url(). 'admin/updatekereta'; ?>" method="post">
                             <div class="modal-body">
                               <div class="form-group">
-                                <p style="color: black; margin-bottom: -0.3%;"><b>Rute Awal</b></p>
+                                <p style="color: black; margin-bottom: -0.3%;"><b>Initial Route</b></p>
                                 <input type="hidden" class="form-control" id="idrutekereta" name="idrutekereta" value="<?php echo $k->idrutekereta ?>">
                                 <input type="text" class="form-control" id="ruteawal" name="ruteawal" value="<?php echo $k->ruteawal ?>">
                               </div>
                               <div class="form-group">
-                                <p style="color: black; margin-bottom: -0.3%;"><b>Rute Akhir</b></p>
+                                <p style="color: black; margin-bottom: -0.3%;"><b>Final Route</b></p>
                                 <input type="text" class="form-control" id="ruteakhir" name="ruteakhir" value="<?php echo $k->ruteakhir ?>">
                               </div>
                               <div class="form-group">
-                                <p style="color: black; margin-bottom: -0.3%;"><b>Jam Berangkat</b></p>
+                                <p style="color: black; margin-bottom: -0.3%;"><b>Departure</b></p>
                                 <input type="time" class="form-control" id="jamberangkat" name="jamberangkat" value="<?php echo $k->jamberangkat ?>">
                               </div>
                               <div class="form-group">
-                                <p style="color: black; margin-bottom: -0.3%;"><b>Jam Tiba</b></p>
+                                <p style="color: black; margin-bottom: -0.3%;"><b>Arrive</b></p>
                                 <input type="time" class="form-control" id="jamtiba" name="jamtiba" value="<?php echo $k->jamtiba ?>">
                               </div>
                               <div class="form-group">
-                                <p style="color: black; margin-bottom: -0.3%;"><b>Harga</b></p>
+                                <p style="color: black; margin-bottom: -0.3%;"><b>Train</b></p>
+                                <input type="text" class="form-control" id="kereta" name="kereta" value="<?php echo $k->kereta ?>">
+                              </div>
+                              <div class="form-group">
+                                <p style="color: black; margin-bottom: -0.3%;"><b>Price</b></p>
                                 <input type="number" class="form-control" id="harga" name="harga" value="<?php echo $k->harga ?>">
                               </div>
                             </div>
@@ -467,9 +493,9 @@
                 <div class="card-body">
                   <div class="chart-area">
                     
-                    <h3 style="margin-top: 5%;">list of Plane Routes</h3>
+                    <h3 style="margin-top: 10%;">list of Plane Routes</h3>
                     <button type="button" class="btn btn-primary" style="margin-bottom: 2%;" data-toggle="modal" data-target="#adddatapesawat">Add Data</button>
-                    <table class="table col-lg-12">
+                    <table class="table" style="margin-left: -5%; width: 180vh; margin-bottom: 5%;">
                       <thead>
                         <tr>
                           <th scope="col">No</th>
@@ -632,6 +658,47 @@
                     </div>
                   </div>
                 <?php } ?>
+
+                <div class="card-body" style="margin-top: 40%;">
+                  <div class="chart-area">
+                    
+                    <h3 style="margin-top: 10%;">list of User</h3>
+                    <button type="button" class="btn btn-primary" style="margin-bottom: 2%;" data-toggle="modal" data-target="#adddatauser">Add Data</button>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Name of User</th>
+                          <th scope="col">Username</th>
+                          <th scope="col">Address</th>
+                          <th scope="col">Date of Birth</th>
+                          <th scope="col">Gender</th>
+                          <th scope="col">Phone</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <?php 
+                        $no = 1;
+                        foreach($datauser as $k){ 
+                        ?>
+                        <tr>
+                          <td><?php echo $no++ ?></td>
+                          <td><?php echo $k->namauser ?></td>
+                          <td><?php echo $k->username ?></td>
+                          <td><?php echo $k->alamat ?></td>
+                          <td><?php echo $k->tanggallahir ?></td>
+                          <td><?php echo $k->jk ?></td>
+                          <td><?php echo $k->telp ?></td>
+                          <td>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updatedatauser<?php echo $k->iduser ?>">Update</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletedatauser<?php echo $k->iduser ?>">Delete</button>
+                          </td>
+                        </tr>
+                      <?php } ?>
+                    </table>
+
+                  </div>
+                </div>
 
             </div>
           </div>

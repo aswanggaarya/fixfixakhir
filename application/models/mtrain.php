@@ -30,4 +30,10 @@ class Mtrain extends CI_Model{
     	$query = $this->db->get('rutekereta');
     	return $query->result();
     }
+
+    public function getrutekereta($idrutekereta)
+    {
+        $this->db->where('idrutekereta', $idrutekereta);
+        return $this->db->get('rutekereta');
+    }
 }

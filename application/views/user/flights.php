@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Agentiket.com - Flights</title>
+  <title>Agentiket.com - Pesawat</title>
   <link rel="icon" href="<?=base_url('assets/')?>img/logo.png" type="image/png">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -43,7 +43,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
           <!-- Sidebar - Brand -->
-          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=base_url('user/')?>">
+          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=base_url('user/trains')?>">
               <img src="<?=base_url('assets/')?>img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
               Agentiket.com
           </a>
@@ -62,13 +62,13 @@
           <li class="nav-item active">
             <a class="nav-link" href="<?=base_url('user/flights')?>">
               <i class="fas fa-plane"></i>
-              <span>Flights</span></a>
+              <span>Pesawat</span></a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url('user/trains')?>">
               <i class="fas fa-subway"></i>
-              <span>Trains</span></a>
+              <span>Kereta</span></a>
           </li>
 
           <!-- Divider -->
@@ -77,7 +77,7 @@
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url('auth/logout');?>" data-toggle="modal" data-target="#logoutModal">
               <i class="fas fa-sign-out-alt"></i>
-              <span>Logout</span>
+              <span>Keluar</span>
             </a>
           </li>
           <!-- Sidebar Toggler (Sidebar) -->
@@ -135,17 +135,17 @@
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
-                  Transaction History
+                  Riwayat Transaksi
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                      <i class="fas fa-file-alt text-white"></i>
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa-donate text-white"></i>
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                    <div class="small text-gray-500">November 13, 2019</div>
+                    IDR 2.500.000 has been paid!
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -155,8 +155,8 @@
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
+                    <div class="small text-gray-500">November 14, 2019</div>
+                    IDR 840.000 has been paid!
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -166,32 +166,31 @@
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for your account.
+                    <div class="small text-gray-500">November 16, 2019</div>
+                    <b>You've unpaid bills.</b>
                   </div>
                 </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All</a>
               </div>
             </li>
 
+            <li class="nav-item">
+              <a class="nav-link" href="<?=base_url('user/pagekonfirmasipes');?>"><small>Status Tiket Pesawat</small></a>
+            </li>
             
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $penumpang['namapenumpang']; ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['namauser']; ?></span>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  MyProfile
-                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?=base_url('auth/logout');?>" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  Keluar
                 </a>
               </div>
             </li>
@@ -217,13 +216,13 @@
                       <div class="row">
                         <div class="col">
                           <fieldset>
-                            <label for="basic-url" style="color: black;"><b>From</b></label>
+                            <label for="basic-url" style="color: black;"><b>Dari</b></label>
                             <div class="field input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3"><i class="fas fa-plane-departure"></i></span>
                               </div>
                                 <select class="form-control form-control-chosen" name="ruteawal">
-                                  <option value="">-- Select Airport --</option>
+                                  <option value="">-- Pilih Bandara --</option>
                                 <?php                                
                                   foreach ($ruteawal as $row) {  
                                   echo "<option value='".$row->ruteawal."'>".$row->ruteawal."</option>";
@@ -236,13 +235,13 @@
                         </div>
                         <div class="col">
                           <fieldset>
-                            <label for="basic-url" style="color: black;"><b>To</b></label>
+                            <label for="basic-url" style="color: black;"><b>Ke</b></label>
                             <div class="field input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3"><i class="fas fa-plane-arrival"></i></span>
                               </div>
                               <select class="form-control form-control-chosen" name="ruteakhir">
-                                  <option value="">-- Select Airport --</option>
+                                  <option value="">-- Pilih Bandara --</option>
                                 <?php                                
                                   foreach ($ruteakhir as $row) {  
                                   echo "<option value='".$row->ruteakhir."'>".$row->ruteakhir."</option>";
@@ -259,18 +258,18 @@
                       <div class="row">
                         <div class="col">
                           <fieldset>
-                            <label for="basic-url" style="color: black;"><b>Departure Date</b></label>
+                            <label for="basic-url" style="color: black;"><b>Tanggal Berangkat</b></label>
                             <div class="field input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3"><i class="far fa-calendar-alt"></i></span>
                               </div>
-                              <input type="date" name="date" value="" min="<?php echo date('Y-m-d') ?>" class="form-control" id="basic-url">
+                              <input type="date" name="date" value="" min="<?php echo date('Y-m-d') ?>" class="form-control" id="basic-url" required>
                             </div>
                           </fieldset>
                         </div>
                         <div class="col">
                           <fieldset>
-                            <label for="basic-url" style="color: black;"><b>No. of Passengers</b></label>
+                            <label for="basic-url" style="color: black;"><b>Jumlah Penumpang</b></label>
                             <div class="field input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3"><i class="fas fa-user-alt"></i></span>
@@ -281,7 +280,7 @@
                         </div>
                       </div>
                       <div class="actions">
-                        <input type="submit" class="btnadd btn btn-warning" name="btnadd" value="Next" style="margin-top: 2%; margin-bottom: 2%;">
+                        <input type="submit" class="btnadd btn btn-warning" name="btnadd" value="Selanjutnya" style="margin-top: 2%; margin-bottom: 2%;">
                       </div>
                     </form>
               

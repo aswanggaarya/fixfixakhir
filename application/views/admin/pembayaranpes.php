@@ -9,12 +9,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Agentiket.com - Kereta</title>
+  <title>Admin - Konfirmasi Pembayaran Pesawat</title>
   <link rel="icon" href="<?=base_url('assets/')?>img/logo.png" type="image/png">
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-  <link rel="stylesheet" href="<?=base_url('assets/')?>css/component-chosen.css">
-  
 
   <!-- Custom fonts for this template-->
   <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,10 +23,9 @@
   <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
 
   <!-- Custom scripts for form-->
+  <script src="https://code.jquery.com/jquery-2.1.0.js" integrity="sha256-D6d1KSapXjq2tfZ6Ie9AYozkRHyB3fT2ys9mO2+4Wvc=" crossorigin="anonymous"></script>
   <script src="<?=base_url('assets/')?>js/jquery-3.3.1.js"></script>
   <script src="<?=base_url('assets/')?>js/jquery-3.3.1.min.js"></script>
-
-  
 
 </head>
 
@@ -38,6 +33,78 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
+    
+    <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+          <!-- Sidebar - Brand -->
+          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=base_url('admin/')?>">
+              <img src="<?=base_url('assets/')?>img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+              Agentiket.com
+          </a>
+
+          <!-- Divider -->
+          <hr class="sidebar-divider my-0">
+          <!-- Divider -->
+          <hr class="sidebar-divider">
+
+          <!-- Heading -->
+          <div class="sidebar-heading">
+            Menu
+          </div>
+
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+              <i class="fas fa-save"></i>
+              <span>Data</span>
+            </a>
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?=base_url('admin/datapetugas')?>">Pegawai</a>
+                <a class="collapse-item" href="<?=base_url('admin/datarutekereta')?>">Rute Kereta</a>
+                <a class="collapse-item" href="<?=base_url('admin/datarutepesawat')?>">Rute Pesawat</a>
+                <a class="collapse-item" href="<?=base_url('admin/datauser')?>">User</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item active">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+              <i class="fas fa-check"></i>
+              <span>Konfirmasi</span>
+            </a>
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item active" href="<?=base_url('admin/pembayaranpes')?>">Pembayaran Pesawat</a>
+                <a class="collapse-item" href="<?=base_url('admin/pembayaranker')?>">Pembayaran Kereta</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url('admin/report')?>">
+              <i class="fas fa-file-word"></i>
+              <span>Report</span></a>
+          </li>
+
+          <!-- Divider -->
+          <hr class="sidebar-divider d-none d-md-block">
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url('admin/logout');?>" data-toggle="modal" data-target="#logoutModal">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+          <!-- Sidebar Toggler (Sidebar) -->
+          <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+          </div>
+
+        </ul>
+    <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -52,11 +119,6 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-
-          <nav class="navbar navbar-light">
-            <img src="<?=base_url('assets/')?>img/logo.png" width="30" height="30" class="d-inline-block align-top" href="<?=base_url('user/trains')?>">
-            <a class="navbar-brand" href="<?=base_url('user/trains')?>" style="color: #434343; margin-top: 10%; font-size: 16px;"><p><b>AGENTIKET.COM</b></p></a>
-          </nav>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -81,72 +143,23 @@
               </div>
             </li>
 
-            <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-clipboard-list"></i>
-                <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3</span>
-              </a>
-              <!-- Dropdown - Alerts -->
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header">
-                  Alerts Center
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                      <i class="fas fa-file-alt text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-success">
-                      <i class="fas fa-donate text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                      <i class="fas fa-exclamation-triangle text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for your account.
-                  </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-              </div>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="<?=base_url('user/pagekonfirmasiker');?>"><small>Status Tiket Kereta</small></a>
-            </li>
             
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['namauser']; ?></span>
+                <?php foreach ($petugas as $p) {?>
+                   <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $p->namapetugas ?></span>
+                <?php }?>
+               
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<?=base_url('auth/logout');?>" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="<?=base_url('admin/logout');?>" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Keluar
+                  Logout
                 </a>
               </div>
             </li>
@@ -164,41 +177,41 @@
             <div class="col-xl-12 col-lg-8">
 
               <!-- Area Chart -->
-              <div class="card shadow md-8">
                 <div class="card-body">
                   <div class="chart-area">
                     
-                    <h3>Daftar Rute Kereta</h3>
-                    <table class="table">
+                    <h3>Konfirmasi Pembayaran Pesawat</h3>
+                    <table class="table" style="margin-left: -4%; width: 180vh;">
                       <thead>
                         <tr>
-                          <th scope="col">Kereta</th>
-                          <th scope="col">Rute Awal</th>
-                          <th scope="col">Rute Akhir</th>
-                          <th scope="col">Berangkat</th>
-                          <th scope="col">Tiba</th>
+                          <th scope="col">No</th>
+                          <th scope="col">No Pembayaran</th>
+                          <th scope="col">No Tiket</th>
                           <th scope="col">Harga</th>
+                          <th scope="col">Penumpang</th>
+                          <th width="20%;" scope="col">Bukti</th>
+                          <th scope="col">Status</th>
                           <th scope="col"></th>
                         </tr>
                       </thead>
                       <?php 
-                        foreach($rutekereta as $k){ 
+                        $no = 1;
+                        foreach($pembayaranpes as $k){ 
                         ?>
                         <tr>
-                          <td><b><?php echo $k->kereta ?></b></td>
-                          <td><?php echo $k->ruteawal ?></td>
-                          <td><?php echo $k->ruteakhir ?></td>
-                          <td><?php echo $k->jamberangkat ?></td>
-                          <td><?php echo $k->jamtiba ?></td>
-                          <td><b style="font-size: 19px; color: #3F9FD5;">Rp <?php echo number_format($k->harga, 0,',','.') ?></b><b style="font-size: 15px;"> / org</b></td>
+                          <td><?php echo $no++ ?></td>
+                          <td><?php echo $k->nopembayaran ?></td>
+                          <td><?php echo $k->nomortiket ?></td>
+                          <td><?php echo $k->harga ?></td>
+                          <td><?php echo $k->penumpang ?></td>
                           <td>
-                            <?php
-                              $date = $_GET['date'];
-                              $passenger = $_GET['penumpang'];
-                            ?>
-                            <a href='<?= base_url("user/pentrain/{$k->idrutekereta}?penumpang={$passenger}&&date={$date}"); ?>'>
-                              <button type="button" class="btn btn-warning" style="margin-top: -5%;">Pilih</button>
+                            <a href="<?=base_url('assets/bukti/'.$k->bukti)?>" target="_blank">
+                              <img width="100%" src="<?=base_url('assets/bukti/'.$k->bukti)?>">
                             </a>
+                          </td>
+                          <td><?php echo $k->status ?></td>
+                          <td>
+                            <a onclick="return confirm('Anda yakin ingin mengkonfirmasi pembayaran <?= $k->nopembayaran ?>?')" href="<?= base_url('admin/verifikasipembayaranpes/'.$k->idpembayaranpes); ?>" class="btn btn-success">Konfirmasi</a>
                           </td>
                         </tr>
                       <?php } ?>
@@ -206,11 +219,9 @@
 
                   </div>
                 </div>
-              </div>
 
             </div>
           </div>
-          
 
         </div>
         <!-- /.container-fluid -->
@@ -219,13 +230,13 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <!-- <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; AGENTIKET.COM 2019</span>
+            <span>Copyright &copy; Your Website 2019</span>
           </div>
         </div>
-      </footer>
+      </footer> -->
       <!-- End of Footer -->
 
     </div>
@@ -252,7 +263,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="<?=base_url('auth/logout');?>">Logout</a>
+          <a class="btn btn-primary" href="<?=base_url('admin/logout');?>">Logout</a>
         </div>
       </div>
     </div>
@@ -267,10 +278,6 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
-  <script src="<?=base_url('assets/')?>js/chosen.jquery.min.js"></script>
-  <script type="text/javascript">
-    $('.form-control-chosen').chosen();
-  </script>
 
 </body>
 

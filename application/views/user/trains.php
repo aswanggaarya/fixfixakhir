@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Agentiket.com - Trains</title>
+  <title>Agentiket.com - Kereta</title>
   <link rel="icon" href="<?=base_url('assets/')?>img/logo.png" type="image/png">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -59,13 +59,13 @@
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url('user/flights')?>">
               <i class="fas fa-plane"></i>
-              <span>Flights</span></a>
+              <span>Pesawat</span></a>
           </li>
 
           <li class="nav-item active">
             <a class="nav-link" href="<?=base_url('user/trains')?>">
               <i class="fas fa-subway"></i>
-              <span>Trains</span></a>
+              <span>Kereta</span></a>
           </li>
 
           <!-- Divider -->
@@ -74,7 +74,7 @@
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url('auth/logout');?>" data-toggle="modal" data-target="#logoutModal">
               <i class="fas fa-sign-out-alt"></i>
-              <span>Logout</span>
+              <span>Keluar</span>
             </a>
           </li>
           <!-- Sidebar Toggler (Sidebar) -->
@@ -171,24 +171,23 @@
               </div>
             </li>
 
-            
+            <li class="nav-item">
+              <a class="nav-link" href="<?=base_url('user/pagekonfirmasiker');?>"><small>Status Tiket Kereta</small></a>
+            </li>
+
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $penumpang['namapenumpang']; ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['namauser']; ?></span>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  MyProfile
-                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?=base_url('auth/logout');?>" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  Keluar
                 </a>
               </div>
             </li>
@@ -214,13 +213,13 @@
                       <div class="row">
                         <div class="col">
                           <fieldset>
-                            <label for="basic-url" style="color: black;"><b>From</b></label>
+                            <label for="basic-url" style="color: black;"><b>Dari</b></label>
                             <div class="field input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3"><i class="fas fa-luggage-cart"></i></span>
                               </div>
                               <select class="form-control form-control-chosen" name="ruteawal">
-                                <option value="">-- Select Station --</option>
+                                <option value="">-- Pilih Stasiun --</option>
                                 <?php                                
                                   foreach ($ruteawal as $row) {  
                                   echo "<option value='".$row->ruteawal."'>".$row->ruteawal."</option>";
@@ -233,13 +232,13 @@
                         </div>
                         <div class="col">
                           <fieldset>
-                            <label for="basic-url" style="color: black;"><b>To</b></label>
+                            <label for="basic-url" style="color: black;"><b>Ke</b></label>
                             <div class="field input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3"><i class="fas fa-suitcase"></i></span>
                               </div>
                               <select class="form-control form-control-chosen" name="ruteakhir">
-                                  <option value="">-- Select Airport --</option>
+                                  <option value="">-- Pilih Stasiun --</option>
                                 <?php                                
                                   foreach ($ruteakhir as $row) {  
                                   echo "<option value='".$row->ruteakhir."'>".$row->ruteakhir."</option>";
@@ -256,7 +255,7 @@
                       <div class="row">
                         <div class="col">
                           <fieldset>
-                            <label for="basic-url" style="color: black;"><b>Departure Date</b></label>
+                            <label for="basic-url" style="color: black;"><b>Tanggal Berangkat</b></label>
                             <div class="field input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3"><i class="far fa-calendar-alt"></i></span>
@@ -267,7 +266,7 @@
                         </div>
                         <div class="col">
                           <fieldset>
-                            <label for="basic-url" style="color: black;"><b>No. of Passengers</b></label>
+                            <label for="basic-url" style="color: black;"><b>Jumlah Penumpang</b></label>
                             <div class="field input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3"><i class="fas fa-user-alt"></i></span>
@@ -278,7 +277,7 @@
                         </div>
                       </div>
                       <div class="actions">
-                        <input type="submit" class="btn btn-warning" name="btnadd" value="Next" style="margin-top: 2%; margin-bottom: 2%;"></td>
+                        <input type="submit" class="btn btn-warning" name="btnadd" value="Selanjutnya" style="margin-top: 2%; margin-bottom: 2%;"></td>
                       </div>
                     </form>
 

@@ -30,4 +30,10 @@ class Mflight extends CI_Model{
     	$query = $this->db->get('rutepesawat');
     	return $query->result();
     }
+
+    public function getrutepesawat($idrutepesawat)
+    {
+        $this->db->where('idrutepesawat', $idrutepesawat);
+        return $this->db->get('rutepesawat');
+    }
 }

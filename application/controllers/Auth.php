@@ -42,13 +42,12 @@ class Auth extends CI_Controller {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 
-		$user = $this->db->get_where('penumpang', ['username' => $username])->row_array();
+		$user = $this->db->get_where('user', ['username' => $username])->row_array();
 
 		if ($user) {
 			if (password_verify($password, $user['password'])) {
 				$data = [
-					'username' => $user['username'],
-					'idlevel' => $user['idlevel']
+					'username' => $user['username']
 				];
 				$this->session->set_userdata($data);
 				redirect('user/flights');
@@ -67,7 +66,7 @@ class Auth extends CI_Controller {
 		// set_rules('atributname', 'namalain', 'aturan'); required(harusdiisi) trim(tidakadspasidepanblkng)
 		// is_unique[namatable.kolom]
 		$this->form_validation->set_rules('namapenumpang', 'Full Name', 'required|trim');
-		$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[penumpang.username]', [
+		$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]', [
 			'is_unique' => 'This username has already registered!'
 		]);
 		$this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
@@ -85,16 +84,15 @@ class Auth extends CI_Controller {
 			$this->load->view('templates/auth_footer');
 		} else {
 			$data = [
-				'namapenumpang' => htmlspecialchars($this->input->post('namapenumpang', true)),
+				'namauser' => htmlspecialchars($this->input->post('namapenumpang', true)),
 				'username' => htmlspecialchars($this->input->post('username', true)),
 				'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
 				'alamat' => htmlspecialchars($this->input->post('alamat', true)),
 				'tanggallahir' => htmlspecialchars($this->input->post('tanggallahir', true)),
 				'jk' => htmlspecialchars($this->input->post('jk', true)),
-				'telp' => htmlspecialchars($this->input->post('telp', true)),
-				'idlevel' => 2
+				'telp' => htmlspecialchars($this->input->post('telp', true))
 			];
-			$this->db->insert('penumpang', $data);
+			$this->db->insert('user', $data);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! your account has been created. Please Login</div>');
 			redirect('auth');
 		}
@@ -103,7 +101,6 @@ class Auth extends CI_Controller {
 	public function logout()
 	{
 		$this->session->unset_userdata('username');
-		$this->session->unset_userdata('idlevel');
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out!</div>');
 		redirect('auth');
 	}
