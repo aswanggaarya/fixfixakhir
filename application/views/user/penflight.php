@@ -245,6 +245,14 @@
                     <p>Berangkat • <?php $date = $_GET['date']; echo "<b>".date('d F Y', strtotime($date))."</b>";?></p>
                     <p>Maskapai • <b><?= $info->maskapai ?></b></p>
                   </div>
+                  <hr style="margin-bottom: -2%; margin-top: -3%;">
+                  <div class="card-body">
+                    <p><b>Punya Kode Vocher?</b></p>
+                    <form action="" method="POST">
+                      <input type="text" class="form-control" name="diskon">
+                      <button type="submit" class="btn btn-primary mt-2 mb-1 float-right">Gunakan</button>
+                    </form>
+                  </div>
                   <div class="card-footer card-header">
                     <p style="margin-bottom: -0.5%;">Total Harga dari <b><?= $jmlpenumpang ?> Orang</b></p>
                   </div>

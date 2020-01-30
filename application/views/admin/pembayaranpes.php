@@ -187,8 +187,7 @@
                           <th scope="col">No</th>
                           <th scope="col">No Pembayaran</th>
                           <th scope="col">No Tiket</th>
-                          <th scope="col">Harga</th>
-                          <th scope="col">Penumpang</th>
+                          <th scope="col">Total Harga</th>
                           <th width="20%;" scope="col">Bukti</th>
                           <th scope="col">Status</th>
                           <th scope="col"></th>
@@ -202,8 +201,7 @@
                           <td><?php echo $no++ ?></td>
                           <td><?php echo $k->nopembayaran ?></td>
                           <td><?php echo $k->nomortiket ?></td>
-                          <td><?php echo $k->harga ?></td>
-                          <td><?php echo $k->penumpang ?></td>
+                          <td><?php echo $k->totalharga ?></td>
                           <td>
                             <a href="<?=base_url('assets/bukti/'.$k->bukti)?>" target="_blank">
                               <img width="100%" src="<?=base_url('assets/bukti/'.$k->bukti)?>">

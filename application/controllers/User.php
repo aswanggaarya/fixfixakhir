@@ -79,8 +79,7 @@ class User extends CI_Controller {
 		$data = array(
 			'nopembayaran' => $nopembayaran,
 			'nomortiket' => $notiket,
-			'harga' => $harga,
-			'penumpang' => $penumpang,
+			'totalharga' => $totalpembayaran,
 			'status' => 0
 		);
 
@@ -225,8 +224,7 @@ class User extends CI_Controller {
 		$data = array(
 			'nopembayaran' => $nopembayaran,
 			'nomortiket' => $notiket,
-			'harga' => $harga,
-			'penumpang' => $penumpang,
+			'totalharga' => $totalpembayaran,
 			'status' => 0
 		);
 
