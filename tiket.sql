@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2020 at 10:05 AM
+-- Generation Time: Feb 01, 2020 at 04:35 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -19,6 +19,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `tiket`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diskonpesawat`
+--
+
+CREATE TABLE `diskonpesawat` (
+  `iddiskon` int(5) NOT NULL,
+  `kodediskon` varchar(50) NOT NULL,
+  `persendiskon` int(5) NOT NULL,
+  `mulai` date NOT NULL,
+  `akhir` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `diskonpesawat`
+--
+
+INSERT INTO `diskonpesawat` (`iddiskon`, `kodediskon`, `persendiskon`, `mulai`, `akhir`) VALUES
+(1, 'TERBANG25', 25, '2020-01-25', '2020-02-25');
 
 -- --------------------------------------------------------
 
@@ -42,40 +63,6 @@ INSERT INTO `level` (`idlevel`, `namalevel`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `namakereta`
---
-
-CREATE TABLE `namakereta` (
-  `idkereta` int(5) NOT NULL,
-  `namakereta` varchar(30) NOT NULL,
-  `jumlahkursi` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `namamaskapai`
---
-
-CREATE TABLE `namamaskapai` (
-  `idmaskapai` int(5) NOT NULL,
-  `namamaskapai` varchar(30) NOT NULL,
-  `jumlahkursi` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `namamaskapai`
---
-
-INSERT INTO `namamaskapai` (`idmaskapai`, `namamaskapai`, `jumlahkursi`) VALUES
-(1, 'Batik Air', 120),
-(2, 'Citilink', 115),
-(3, 'Lion Air', 125),
-(4, 'Garuda Indonesia', 130);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pembayarankereta`
 --
 
@@ -83,8 +70,7 @@ CREATE TABLE `pembayarankereta` (
   `idpembayaranker` int(5) NOT NULL,
   `nopembayaran` varchar(20) NOT NULL,
   `nomortiket` varchar(20) NOT NULL,
-  `harga` int(6) NOT NULL,
-  `penumpang` int(2) NOT NULL,
+  `totalharga` int(10) NOT NULL,
   `bukti` varchar(255) DEFAULT NULL,
   `status` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -93,13 +79,14 @@ CREATE TABLE `pembayarankereta` (
 -- Dumping data for table `pembayarankereta`
 --
 
-INSERT INTO `pembayarankereta` (`idpembayaranker`, `nopembayaran`, `nomortiket`, `harga`, `penumpang`, `bukti`, `status`) VALUES
-(1, 'KER02202031', 'KR001', 200000, 3, NULL, 2),
-(2, 'KER02202012', 'KR002', 500000, 1, NULL, 0),
-(3, 'KER02202013', 'KR003', 500000, 1, NULL, 0),
-(4, 'KER02202014', 'KR004', 500000, 1, NULL, 0),
-(5, 'KER02202015', 'KR004', 500000, 1, 'transfer1.jpg', 2),
-(6, 'KER02202026', 'KR005', 500000, 2, NULL, 2);
+INSERT INTO `pembayarankereta` (`idpembayaranker`, `nopembayaran`, `nomortiket`, `totalharga`, `bukti`, `status`) VALUES
+(1, 'KER02202031', 'KR001', 200000, NULL, 2),
+(2, 'KER02202012', 'KR002', 500000, NULL, 0),
+(3, 'KER02202013', 'KR003', 500000, NULL, 0),
+(4, 'KER02202014', 'KR004', 500000, NULL, 0),
+(5, 'KER02202015', 'KR004', 500000, 'transfer1.jpg', 2),
+(6, 'KER02202026', 'KR005', 500000, NULL, 2),
+(7, 'KER02202037', 'KR006', 1500000, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -111,8 +98,7 @@ CREATE TABLE `pembayaranpesawat` (
   `idpembayaranpes` int(5) NOT NULL,
   `nopembayaran` varchar(20) NOT NULL,
   `nomortiket` varchar(20) NOT NULL,
-  `harga` int(6) NOT NULL,
-  `penumpang` int(2) NOT NULL,
+  `totalharga` int(10) NOT NULL,
   `bukti` varchar(255) DEFAULT NULL,
   `status` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -121,20 +107,23 @@ CREATE TABLE `pembayaranpesawat` (
 -- Dumping data for table `pembayaranpesawat`
 --
 
-INSERT INTO `pembayaranpesawat` (`idpembayaranpes`, `nopembayaran`, `nomortiket`, `harga`, `penumpang`, `bukti`, `status`) VALUES
-(1, 'PES02202011', 'PS001', 840000, 1, 'trans.jpg', 2),
-(2, 'PES02202022', 'PS002', 840000, 2, 'transfer.jpg', 2),
-(3, 'PES02202013', 'PS003', 300000, 1, 'transfer1.jpg', 2),
-(4, 'PES02202014', 'PS004', 200000, 1, 'transfer2.jpg', 1),
-(5, 'PES02202015', 'PS005', 1000000, 1, 'transfer11.jpg', 1),
-(6, 'PES02202016', 'PS006', 840000, 1, 'transfer3.jpg', 1),
-(7, 'PES02202017', 'PS007', 840000, 1, 'transfer21.jpg', 1),
-(8, 'PES02202028', 'PS008', 500000, 2, 'transfer111.jpg', 1),
-(9, 'PES02202019', 'PS009', 840000, 1, 'transfer4.jpg', 1),
-(10, 'PES022020210', 'PS0010', 300000, 2, 'transfer112.jpg', 1),
-(11, 'PES022020111', 'PS0011', 840000, 1, 'transfer5.jpg', 1),
-(12, 'PES022020112', 'PS0012', 840000, 1, 'transfer12.jpg', 1),
-(13, 'PES022020113', 'PS0013', 900000, 1, NULL, 0);
+INSERT INTO `pembayaranpesawat` (`idpembayaranpes`, `nopembayaran`, `nomortiket`, `totalharga`, `bukti`, `status`) VALUES
+(1, 'PES02202011', 'PS001', 840000, 'trans.jpg', 2),
+(2, 'PES02202022', 'PS002', 840000, 'transfer.jpg', 2),
+(3, 'PES02202013', 'PS003', 300000, 'transfer1.jpg', 2),
+(4, 'PES02202014', 'PS004', 200000, 'transfer2.jpg', 1),
+(5, 'PES02202015', 'PS005', 1000000, 'transfer11.jpg', 1),
+(6, 'PES02202016', 'PS006', 840000, 'transfer3.jpg', 1),
+(7, 'PES02202017', 'PS007', 840000, 'transfer21.jpg', 1),
+(8, 'PES02202028', 'PS008', 500000, 'transfer111.jpg', 1),
+(9, 'PES02202019', 'PS009', 840000, 'transfer4.jpg', 1),
+(10, 'PES022020210', 'PS0010', 300000, 'transfer112.jpg', 1),
+(11, 'PES022020111', 'PS0011', 840000, 'transfer5.jpg', 1),
+(12, 'PES022020112', 'PS0012', 840000, 'transfer12.jpg', 1),
+(13, 'PES022020113', 'PS0013', 900000, NULL, 0),
+(14, 'PES022020314', 'PS0014', 2520000, NULL, 0),
+(15, 'PES022020115', 'PS0015', 840000, 'transfer8.jpg', 1),
+(16, 'PES022020116', 'PS0016', 900000, 'transfer9.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -160,7 +149,8 @@ INSERT INTO `pemesanankereta` (`idpemesananker`, `nomortiket`, `idrutekereta`, `
 (2, 'KR002', 1, 'Wijaya', 'wijaya@gmail.com', 'Jakarta Barat'),
 (3, 'KR003', 1, 'Woke', 'woke@gmail.com', 'Pamulang'),
 (4, 'KR004', 1, 'Kertosono', 'kertosono@gmail.com', 'Jakarta Pusat'),
-(5, 'KR005', 1, 'Wijanto', 'wijanto@gmail.com', 'Serpong');
+(5, 'KR005', 1, 'Wijanto', 'wijanto@gmail.com', 'Serpong'),
+(6, 'KR006', 1, 'Uno', 'uno@gmail.com', 'uno@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -194,7 +184,10 @@ INSERT INTO `pemesananpesawat` (`idpemesananpes`, `nomortiket`, `idrutepesawat`,
 (10, 'PS0010', 3, 'Meizha', 'meizha@gmail.com', 'Serpong'),
 (11, 'PS0011', 1, 'Wawan', 'wawan@gmail.com', 'Jl.Panji'),
 (12, 'PS0012', 1, 'Nani', 'nani@gmail.com', 'Serpong'),
-(13, 'PS0013', 2, 'Anton', 'anton@gmail.com', 'Cipondoh');
+(13, 'PS0013', 2, 'Anton', 'anton@gmail.com', 'Cipondoh'),
+(14, 'PS0014', 1, 'Yoyo', 'yoyo@gmail.com', 'Cipondoh'),
+(15, 'PS0015', 1, 'Opaq', 'opaq@gmail.com', 'Serpong'),
+(16, 'PS0016', 2, 'Maman', 'maman@gmail.com', 'Cipocok');
 
 -- --------------------------------------------------------
 
@@ -223,7 +216,10 @@ INSERT INTO `penumpangkereta` (`idpenumpangker`, `nomortiket`, `noidentitas`, `n
 (5, 'KR003', '76386884', 'Woke', 3, '2A'),
 (6, 'KR004', '54654654', 'Kertosono', 2, '1A'),
 (7, 'KR005', '87497494', 'Wijanto', 3, '1A'),
-(8, 'KR005', '87497495', 'Onta', 2, '2B');
+(8, 'KR005', '87497495', 'Onta', 2, '2B'),
+(9, 'KR006', '86489732', 'Uno', 2, '2F'),
+(10, 'KR006', '98734987', 'Ino', 2, '4A'),
+(11, 'KR006', '98743732', 'Ano', 3, '8A');
 
 -- --------------------------------------------------------
 
@@ -259,7 +255,12 @@ INSERT INTO `penumpangpesawat` (`idpenumpangpes`, `nomortiket`, `noidentitas`, `
 (13, 'PS0010', '9732579', 'Aswangga', '20E'),
 (14, 'PS0011', '8789378', 'Wawan', '8A'),
 (15, 'PS0012', '98794279', 'Nani', '37F'),
-(16, 'PS0013', '76386753', 'Anton', '37C');
+(16, 'PS0013', '76386753', 'Anton', '37C'),
+(17, 'PS0014', '76436653', 'Yoyo', '20F'),
+(18, 'PS0014', '76436654', 'Yaya', '20A'),
+(19, 'PS0014', '76436655', 'Yiyi', '20E'),
+(20, 'PS0015', '97394323', 'Opaq', '8C'),
+(21, 'PS0016', '87587387', 'Maman', '21A');
 
 -- --------------------------------------------------------
 
@@ -376,22 +377,16 @@ INSERT INTO `user` (`iduser`, `namauser`, `username`, `password`, `alamat`, `tan
 --
 
 --
+-- Indexes for table `diskonpesawat`
+--
+ALTER TABLE `diskonpesawat`
+  ADD PRIMARY KEY (`iddiskon`);
+
+--
 -- Indexes for table `level`
 --
 ALTER TABLE `level`
   ADD PRIMARY KEY (`idlevel`);
-
---
--- Indexes for table `namakereta`
---
-ALTER TABLE `namakereta`
-  ADD PRIMARY KEY (`idkereta`);
-
---
--- Indexes for table `namamaskapai`
---
-ALTER TABLE `namamaskapai`
-  ADD PRIMARY KEY (`idmaskapai`);
 
 --
 -- Indexes for table `pembayarankereta`
@@ -409,13 +404,15 @@ ALTER TABLE `pembayaranpesawat`
 -- Indexes for table `pemesanankereta`
 --
 ALTER TABLE `pemesanankereta`
-  ADD PRIMARY KEY (`idpemesananker`);
+  ADD PRIMARY KEY (`idpemesananker`),
+  ADD KEY `idrutekereta` (`idrutekereta`);
 
 --
 -- Indexes for table `pemesananpesawat`
 --
 ALTER TABLE `pemesananpesawat`
-  ADD PRIMARY KEY (`idpemesananpes`);
+  ADD PRIMARY KEY (`idpemesananpes`),
+  ADD KEY `idrutepesawat` (`idrutepesawat`);
 
 --
 -- Indexes for table `penumpangkereta`
@@ -433,7 +430,8 @@ ALTER TABLE `penumpangpesawat`
 -- Indexes for table `petugas`
 --
 ALTER TABLE `petugas`
-  ADD PRIMARY KEY (`idpetugas`);
+  ADD PRIMARY KEY (`idpetugas`),
+  ADD KEY `idlevel` (`idlevel`);
 
 --
 -- Indexes for table `rutekereta`
@@ -458,50 +456,45 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `diskonpesawat`
+--
+ALTER TABLE `diskonpesawat`
+  MODIFY `iddiskon` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
   MODIFY `idlevel` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `namakereta`
---
-ALTER TABLE `namakereta`
-  MODIFY `idkereta` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `namamaskapai`
---
-ALTER TABLE `namamaskapai`
-  MODIFY `idmaskapai` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
 -- AUTO_INCREMENT for table `pembayarankereta`
 --
 ALTER TABLE `pembayarankereta`
-  MODIFY `idpembayaranker` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idpembayaranker` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `pembayaranpesawat`
 --
 ALTER TABLE `pembayaranpesawat`
-  MODIFY `idpembayaranpes` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idpembayaranpes` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `pemesanankereta`
 --
 ALTER TABLE `pemesanankereta`
-  MODIFY `idpemesananker` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idpemesananker` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `pemesananpesawat`
 --
 ALTER TABLE `pemesananpesawat`
-  MODIFY `idpemesananpes` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idpemesananpes` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `penumpangkereta`
 --
 ALTER TABLE `penumpangkereta`
-  MODIFY `idpenumpangker` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idpenumpangker` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `penumpangpesawat`
 --
 ALTER TABLE `penumpangpesawat`
-  MODIFY `idpenumpangpes` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idpenumpangpes` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `petugas`
 --
@@ -522,6 +515,28 @@ ALTER TABLE `rutepesawat`
 --
 ALTER TABLE `user`
   MODIFY `iduser` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `pemesanankereta`
+--
+ALTER TABLE `pemesanankereta`
+  ADD CONSTRAINT `pemesanankereta_ibfk_1` FOREIGN KEY (`idrutekereta`) REFERENCES `rutekereta` (`idrutekereta`);
+
+--
+-- Constraints for table `pemesananpesawat`
+--
+ALTER TABLE `pemesananpesawat`
+  ADD CONSTRAINT `pemesananpesawat_ibfk_1` FOREIGN KEY (`idrutepesawat`) REFERENCES `rutepesawat` (`idrutepesawat`);
+
+--
+-- Constraints for table `petugas`
+--
+ALTER TABLE `petugas`
+  ADD CONSTRAINT `petugas_ibfk_1` FOREIGN KEY (`idlevel`) REFERENCES `level` (`idlevel`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

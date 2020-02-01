@@ -131,7 +131,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="<?=base_url('user/konfirmasipes');?>" style="color: grey;"><small>Status Tiket Pesawat</small></a>
+              <a class="nav-link" href="<?=base_url('user/pagekonfirmasiker');?>" style="color: grey;"><small>Status Tiket Kereta</small></a>
             </li>
 
             <div class="topbar-divider d-none d-sm-block"></div>
@@ -176,7 +176,7 @@
                 <?php endif; ?> 
                 <div class="card shadow mb-4">
                   <div class="card-body">
-                    <div class="card-header text-center"><h5><b>Cek Status Tiket Pesawat</b></h5></div>
+                    <div class="card-header text-center"><h5><b>Cek Status Tiket Kereta</b></h5></div>
                     
                     <form action="<?= base_url('user/cekpembayaranker'); ?>" method="POST">
                       <div class="form-group text-center">

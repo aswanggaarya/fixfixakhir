@@ -130,6 +130,9 @@
               </div>
             </li>
 
+            <li class="nav-item">
+              <a class="nav-link" href="<?=base_url('user/pagekonfirmasipes');?>"><small>Status Tiket Pesawat</small></a>
+            </li>
             
             <div class="topbar-divider d-none d-sm-block"></div>
 

@@ -24,6 +24,7 @@ class User extends CI_Controller {
 	    $this->load->model('mflight');
 	    $this->load->model('mtrain');
 	    $this->load->model('m_user');
+	    $this->load->model('mdiskonpes');
     }
 
 	public function flights()
@@ -57,9 +58,17 @@ class User extends CI_Controller {
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 		$data['info'] = $this->mflight->getrutepesawat($idrutepesawat)->row();
 		$data['idrutepesawat'] = $idrutepesawat;
+		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+		$kodediskon = $this->input->get('kodediskon');
+		$getkodediskon = $this->mdiskonpes->getkodediskon();
+		$diskon = [
+			'kodediskon' => $kodediskon
+		];
+		$data['diskonpesawat'] = $this->mdiskonpes->searchdiskon($diskon);
 
 		$this->load->view('user/penflight', $data);
 	}
+
 
 	public function pesanpesawat()
 	{

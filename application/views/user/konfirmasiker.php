@@ -214,7 +214,7 @@
 
                         <?php elseif($nomortiket->status === '2'): ?>
 
-                        <form action="<?= base_url('user/print_kereta')?>" method="post">
+                        <form action="<?= base_url('user/print_kereta')?>" method="post" target="_blank">
                           <input type="hidden" name="no_tiket" value="<?= $nomortiket->nomortiket?>">
                           <center>
                             <button type="submit" class="btn btn-success btn-block"> Cetak Tiket </button>

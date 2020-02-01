@@ -248,8 +248,8 @@
                   <hr style="margin-bottom: -2%; margin-top: -3%;">
                   <div class="card-body">
                     <p><b>Punya Kode Vocher?</b></p>
-                    <form action="" method="POST">
-                      <input type="text" class="form-control" name="diskon">
+                    <form action="<?= base_url('user/penflight'); ?>" name="diskon" method="POST">
+                      <input type="text" class="form-control" name="kodediskon">
                       <button type="submit" class="btn btn-primary mt-2 mb-1 float-right">Gunakan</button>
                     </form>
                   </div>
@@ -257,7 +257,24 @@
                     <p style="margin-bottom: -0.5%;">Total Harga dari <b><?= $jmlpenumpang ?> Orang</b></p>
                   </div>
                   <div class="card-body text-right">
-                    <b style="color: orange;">Rp <?php echo number_format($info->harga*$jmlpenumpang , 0,',','.') ?></b>
+                    <?php
+                      foreach($diskonpesawat as $k){ 
+                        $discount_percent = $k->persendiskon;
+                        $harga_awal = $info->harga*$jmlpenumpang;
+
+                        $discount_amount = $harga_awal * $discount_percent * .01;
+                        $discount_price = $harga_awal - $discount_amount ;
+                        function formatDigits($digit) {
+                         echo number_format($digit,0,",",".");
+                        }
+                      }
+                    ?>
+                    <ul>
+                      <li>Harga Normal: <del><?php formatDigits($harga_awal); ?></del></li>
+                      <li>Diskon: <?php echo $discount_percent . ' %'; ?></li>
+                      <li>Anda Hemat: <?php formatDigits($discount_amount); ?></li>
+                    </ul>
+                    <b style="color: orange;">Rp <?php formatDigits($discount_price); ?></b>
                   </div>
                 </div>
               </div>
