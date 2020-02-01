@@ -55,11 +55,11 @@
 
           <!-- Nav Item - Pages Collapse Menu -->
           <li class="nav-item active">
-            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#colpetugas" aria-expanded="true" aria-controls="colpetugas">
               <i class="fas fa-save"></i>
               <span>Data</span>
             </a>
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="colpetugas" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item active" href="<?=base_url('admin/datapetugas')?>">Petugas</a>
                 <a class="collapse-item" href="<?=base_url('admin/datarutekereta')?>">Rute Kereta</a>
@@ -71,22 +71,44 @@
 
           <!-- Nav Item - Pages Collapse Menu -->
           <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-              <i class="fas fa-save"></i>
-              <span>Konfirmasi</span>
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#colpemesanan" aria-expanded="true" aria-controls="colpemesanan">
+              <i class="fas fa-shopping-cart"></i>
+              <span>Pemesanan</span>
             </a>
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="colpemesanan" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?=base_url('admin/pembayaranpes')?>">Pembayaran Pesawat</a>
-                <a class="collapse-item" href="<?=base_url('admin/pembayaranker')?>">Pembayaran Kereta</a>
+                <a class="collapse-item" href="<?=base_url('admin/pmsnkereta')?>">Kereta</a>
+                <a class="collapse-item" href="<?=base_url('admin/pmsnpesawat')?>">Pesawat</a>
               </div>
             </div>
           </li>
 
+          <!-- Nav Item - Pages Collapse Menu -->
           <li class="nav-item">
-            <a class="nav-link" href="<?=base_url('admin/report')?>">
-              <i class="fas fa-file-word"></i>
-              <span>Report</span></a>
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#colpembayaran" aria-expanded="true" aria-controls="colpembayaran">
+              <i class="fas fa-money-bill-wave"></i>
+              <span>Pembayaran</span>
+            </a>
+            <div id="colpembayaran" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?=base_url('admin/pmyrnkereta')?>">Kereta</a>
+                <a class="collapse-item" href="<?=base_url('admin/pmyrnpesawat')?>">Pesawat</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#colkonfirmasi" aria-expanded="true" aria-controls="colkonfirmasi">
+              <i class="fas fa-check"></i>
+              <span>Konfirmasi</span>
+            </a>
+            <div id="colkonfirmasi" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?=base_url('admin/pembayaranker')?>">Pembayaran Kereta</a>
+                <a class="collapse-item" href="<?=base_url('admin/pembayaranpes')?>">Pembayaran Pesawat</a>
+              </div>
+            </div>
           </li>
 
           <!-- Divider -->

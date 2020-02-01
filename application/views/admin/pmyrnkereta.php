@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Admin - Entry Data</title>
+  <title>Admin - Pembayaran Kereta</title>
   <link rel="icon" href="<?=base_url('assets/')?>img/logo.png" type="image/png">
 
   <!-- Custom fonts for this template-->
@@ -54,7 +54,7 @@
           </div>
 
           <!-- Nav Item - Pages Collapse Menu -->
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#colpetugas" aria-expanded="true" aria-controls="colpetugas">
               <i class="fas fa-save"></i>
               <span>Data</span>
@@ -64,7 +64,7 @@
                 <a class="collapse-item" href="<?=base_url('admin/datapetugas')?>">Petugas</a>
                 <a class="collapse-item" href="<?=base_url('admin/datarutekereta')?>">Rute Kereta</a>
                 <a class="collapse-item" href="<?=base_url('admin/datarutepesawat')?>">Rute Pesawat</a>
-                <a class="collapse-item active" href="<?=base_url('admin/datauser')?>">User</a>
+                <a class="collapse-item" href="<?=base_url('admin/datauser')?>">User</a>
               </div>
             </div>
           </li>
@@ -84,14 +84,14 @@
           </li>
 
           <!-- Nav Item - Pages Collapse Menu -->
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#colpembayaran" aria-expanded="true" aria-controls="colpembayaran">
               <i class="fas fa-money-bill-wave"></i>
               <span>Pembayaran</span>
             </a>
             <div id="colpembayaran" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?=base_url('admin/pmyrnkereta')?>">Kereta</a>
+                <a class="collapse-item active" href="<?=base_url('admin/pmyrnkereta')?>">Kereta</a>
                 <a class="collapse-item" href="<?=base_url('admin/pmyrnpesawat')?>">Pesawat</a>
               </div>
             </div>
@@ -178,10 +178,6 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  MyProfile
-                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?=base_url('admin/logout');?>" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -206,36 +202,36 @@
                 <div class="card-body">
                   <div class="chart-area">
                     
-                    <h3>Data User</h3>
-                    <button type="button" class="btn btn-primary" style="margin-bottom: 2%;" data-toggle="modal" data-target="#adddatauser">Tambah Data</button>
-                    <table class="table">
+                    <h3>Pembayaran Kereta</h3>
+                    <table class="table" style="margin-left: -4%; width: 180vh;">
                       <thead>
                         <tr>
                           <th scope="col">No</th>
-                          <th scope="col">Nama User</th>
-                          <th scope="col">Username</th>
-                          <th scope="col">Alamat</th>
-                          <th scope="col">Tanggal Lahir</th>
-                          <th scope="col">Gender</th>
-                          <th scope="col">No Telp</th>
+                          <th scope="col">No Pembayaran</th>
+                          <th scope="col">No Tiket</th>
+                          <th scope="col">Total Harga</th>
+                          <th width="20%;" scope="col">Bukti</th>
+                          <th scope="col">Status</th>
                           <th scope="col"></th>
                         </tr>
                       </thead>
                       <?php 
                         $no = 1;
-                        foreach($datauser as $k){ 
+                        foreach($pmyrnkereta as $k){ 
                         ?>
                         <tr>
                           <td><?php echo $no++ ?></td>
-                          <td><?php echo $k->namauser ?></td>
-                          <td><?php echo $k->username ?></td>
-                          <td><?php echo $k->alamat ?></td>
-                          <td><?php echo $k->tanggallahir ?></td>
-                          <td><?php echo $k->jk ?></td>
-                          <td><?php echo $k->telp ?></td>
+                          <td><?php echo $k->nopembayaran ?></td>
+                          <td><?php echo $k->nomortiket ?></td>
+                          <td><?php echo $k->totalharga ?></td>
                           <td>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updatedatauser<?php echo $k->iduser ?>">Ubah</button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletedatauser<?php echo $k->iduser ?>">Hapus</button>
+                            <a href="<?=base_url('assets/bukti/'.$k->bukti)?>" target="_blank">
+                              <img width="100%" src="<?=base_url('assets/bukti/'.$k->bukti)?>">
+                            </a>
+                          </td>
+                          <td><?php echo $k->status ?></td>
+                          <td>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletedatapembayaranker<?php echo $k->idpembayaranker ?>">Hapus</button>
                           </td>
                         </tr>
                       <?php } ?>
@@ -244,130 +240,28 @@
                   </div>
                 </div>
 
-                <!-- Modal Add User -->
-                <div class="modal fade" id="adddatauser" tabindex="-1" role="dialog" aria-labelledby="adddatauserLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="adddatauserLabel" style="color: black;">Tambah Data User</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      
-                      <form action="<?php echo base_url(). 'admin/tambahuser'; ?>" method="post">
-                        <div class="modal-body">
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Nama User</b></p>
-                            <input type="text" class="form-control" id="namauser" name="namauser">
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Username</b></p>
-                            <input type="text" class="form-control" id="username" name="username">
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Password</b></p>
-                            <input type="password" class="form-control" id="password" name="password">
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Alamat</b></p>
-                            <textarea class="form-control" rows="3" name="alamat"></textarea>
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Tanggal Lahir</b></p>
-                            <input type="date" class="form-control" name="tanggallahir" id="tanggallahir">
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Jenis Kelamin</b></p>
-                            <input type="radio" name="jk" id="jk" value="l"> Laki-laki
-                            <input type="radio" name="jk" id="jk" value="p"> Perempuan
-                            <br>
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>No Telephone</b></p>
-                            <input type="number" class="form-control" id="telp" name="telp">
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                          <input class="btn btn-success" type="submit" value="Tambah">
-                        </div>
-                        </td>
-                        </div>
-                      </form>
-                      
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Modal Hapus Petugas -->
-                <?php foreach($datauser as $p){ ?>
-                  <div class="modal fade" id="deletedatauser<?php echo $p->iduser ?>" tabindex="-1" role="dialog" aria-labelledby="adddatauserLabel" aria-hidden="true">
+                <!-- Modal Hapus pembayaranker -->
+                <?php foreach($pmyrnkereta as $k){ ?>
+                  <div class="modal fade" id="deletedatapembayaranker<?php echo $k->idpembayaranker ?>" tabindex="-1" role="dialog" aria-labelledby="adddatapembayarankerLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="adddatauserLabel" style="color: black;">Hapus Data User</h5>
+                          <h5 class="modal-title" id="adddatapetugasLabel" style="color: black;">Hapus Data Pembayaran</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
                         
-                          <form action="<?php echo base_url().'admin/hapususer'?>" method="post">
+                          <form action="<?php echo base_url().'admin/hapuspmyrnkereta'?>" method="post">
                             <div class="modal-body">
-                                <p>Anda yakin ingin menghapus <b><?php echo $p->namauser;?></b>?</p>
+                                <p>Anda yakin ingin menghapus data pemesan dengan ID <b><?php echo $k->nopembayaran;?></b>?</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                <?php echo anchor('admin/hapususer/'.$p->iduser,'<button type="button" class="btn btn-danger">Hapus</button>'); ?>
+                                <?php echo anchor('admin/hapuspmyrnkereta/'.$k->idpembayaranker,'<button type="button" class="btn btn-danger">Hapus</button>'); ?>
                             </div>
                           </form>
                         
-                      </div>
-                    </div>
-                  </div>
-                <?php } ?>
-
-                <?php foreach($datauser as $p){ ?>
-                  <div class="modal fade" id="updatedatauser<?php echo $p->iduser ?>" tabindex="-1" role="dialog" aria-labelledby="updatedatauserLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="updatedatauserLabel" style="color: black;">Ubah Data User</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-
-                        <form action="<?php echo base_url(). 'admin/updateuser'; ?>" method="post">
-                          <div class="modal-body">
-                            <div class="form-group">
-                              <p style="color: black; margin-bottom: -0.3%;"><b>Nama User</b></p>
-                              <input type="hidden" class="form-control" id="iduser" name="iduser" value="<?php echo $p->iduser ?>">
-                              <input type="text" class="form-control" id="namauser" name="namauser" value="<?php echo $p->namauser ?>">
-                            </div>
-                            <div class="form-group">
-                              <p style="color: black; margin-bottom: -0.3%;"><b>Username</b></p>
-                              <input type="text" class="form-control" id="username" name="username" value="<?php echo $p->username ?>">
-                            </div>
-                            <div class="form-group">
-                              <p style="color: black; margin-bottom: -0.3%;"><b>Alamat</b></p>
-                              <input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $p->alamat ?>">
-                            </div>
-                            <div class="form-group">
-                              <p style="color: black; margin-bottom: -0.3%;"><b>Tanggal Lahir</b></p>
-                              <input type="date" class="form-control" name="tanggallahir" id="tanggallahir" value="<?php echo $p->tanggallahir ?>">
-                            </div>
-                            <div class="form-group">
-                              <p style="color: black; margin-bottom: -0.3%;"><b>No Telphone</b></p>
-                              <input type="number" class="form-control" id="telp" name="telp" value="<?php echo $p->telp ?>">
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                              <input class="btn btn-success" type="submit" value="Ubah">
-                          </div>
-                        </form>
-
                       </div>
                     </div>
                   </div>

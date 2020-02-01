@@ -27,6 +27,8 @@ class Admin extends CI_Controller {
 		$this->load->model('m_user');
 		$this->load->model('m_pembayaranpes');
 		$this->load->model('m_pembayaranker');
+		$this->load->model('m_pemesananker');
+		$this->load->model('m_pemesananpes');
  	 	$this->load->helper('url');
 	}
 
@@ -293,6 +295,34 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/pembayaranpes', $data);
 	}
 
+	public function pmyrnpesawat()
+	{
+		$data['petugas'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->result();
+		$data['pmyrnpesawat'] = $this->m_pembayaranpes->tampil_semua()->result();
+		
+		$this->load->view('admin/pmyrnpesawat', $data);
+	}
+
+	public function hapuspmyrnpesawat($idpembayaranpes){
+		$where = array('idpembayaranpes' => $idpembayaranpes);
+		$this->m_pembayaranpes->hapus_data($where,'pembayaranpesawat');
+		redirect('admin/pmyrnpesawat');
+	}
+
+	public function pmsnpesawat()
+	{
+		$data['petugas'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->result();
+		$data['datapmsnpes'] = $this->m_pemesananpes->tampil_semua()->result();
+		
+		$this->load->view('admin/pmsnpesawat', $data);
+	}
+
+	public function hapuspmsnpes($idpemesananpes){
+		$where = array('idpemesananpes' => $idpemesananpes);
+		$this->m_pemesananpes->hapus_data($where,'pemesananpesawat');
+		redirect('admin/pmsnpesawat');
+	}
+
 	public function verifikasipembayaranpes($id)
 	{
 		$update = $this->m_pembayaranpes->updatepembayaran($id);
@@ -311,6 +341,34 @@ class Admin extends CI_Controller {
 		$data['pembayaranker'] = $this->m_pembayaranker->tampil_data()->result();
 		
 		$this->load->view('admin/pembayaranker', $data);
+	}
+
+	public function pmyrnkereta()
+	{
+		$data['petugas'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->result();
+		$data['pmyrnkereta'] = $this->m_pembayaranker->tampil_semua()->result();
+		
+		$this->load->view('admin/pmyrnkereta', $data);
+	}
+
+	public function hapuspmyrnkereta($idpembayaranker){
+		$where = array('idpembayaranker' => $idpembayaranker);
+		$this->m_pembayaranker->hapus_data($where,'pembayarankereta');
+		redirect('admin/pmyrnkereta');
+	}
+
+	public function pmsnkereta()
+	{
+		$data['petugas'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->result();
+		$data['datapmsnker'] = $this->m_pemesananker->tampil_semua()->result();
+		
+		$this->load->view('admin/pmsnkereta', $data);
+	}
+
+	public function hapuspmsnker($idpemesananker){
+		$where = array('idpemesananker' => $idpemesananker);
+		$this->m_pemesananker->hapus_data($where,'pemesanankereta');
+		redirect('admin/pmsnkereta');
 	}
 
 	public function verifikasipembayaranker($id)

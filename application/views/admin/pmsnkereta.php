@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Admin - Entry Data</title>
+  <title>Admin - Pemesanan Kereta</title>
   <link rel="icon" href="<?=base_url('assets/')?>img/logo.png" type="image/png">
 
   <!-- Custom fonts for this template-->
@@ -54,7 +54,7 @@
           </div>
 
           <!-- Nav Item - Pages Collapse Menu -->
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#colpetugas" aria-expanded="true" aria-controls="colpetugas">
               <i class="fas fa-save"></i>
               <span>Data</span>
@@ -64,20 +64,20 @@
                 <a class="collapse-item" href="<?=base_url('admin/datapetugas')?>">Petugas</a>
                 <a class="collapse-item" href="<?=base_url('admin/datarutekereta')?>">Rute Kereta</a>
                 <a class="collapse-item" href="<?=base_url('admin/datarutepesawat')?>">Rute Pesawat</a>
-                <a class="collapse-item active" href="<?=base_url('admin/datauser')?>">User</a>
+                <a class="collapse-item" href="<?=base_url('admin/datauser')?>">User</a>
               </div>
             </div>
           </li>
 
           <!-- Nav Item - Pages Collapse Menu -->
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#colpemesanan" aria-expanded="true" aria-controls="colpemesanan">
               <i class="fas fa-shopping-cart"></i>
               <span>Pemesanan</span>
             </a>
             <div id="colpemesanan" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?=base_url('admin/pmsnkereta')?>">Kereta</a>
+                <a class="collapse-item active" href="<?=base_url('admin/pmsnkereta')?>">Kereta</a>
                 <a class="collapse-item" href="<?=base_url('admin/pmsnpesawat')?>">Pesawat</a>
               </div>
             </div>
@@ -206,36 +206,31 @@
                 <div class="card-body">
                   <div class="chart-area">
                     
-                    <h3>Data User</h3>
-                    <button type="button" class="btn btn-primary" style="margin-bottom: 2%;" data-toggle="modal" data-target="#adddatauser">Tambah Data</button>
+                    <h3 class="mb-2">Pemesanan Kerata</h3>
                     <table class="table">
                       <thead>
                         <tr>
                           <th scope="col">No</th>
-                          <th scope="col">Nama User</th>
-                          <th scope="col">Username</th>
+                          <th scope="col">No Tiket</th>
+                          <th scope="col">ID Rute Kereta</th>
+                          <th scope="col">Nama Pemesan</th>
+                          <th scope="col">Email</th>
                           <th scope="col">Alamat</th>
-                          <th scope="col">Tanggal Lahir</th>
-                          <th scope="col">Gender</th>
-                          <th scope="col">No Telp</th>
-                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <?php 
                         $no = 1;
-                        foreach($datauser as $k){ 
+                        foreach($datapmsnker as $p){ 
                         ?>
                         <tr>
                           <td><?php echo $no++ ?></td>
-                          <td><?php echo $k->namauser ?></td>
-                          <td><?php echo $k->username ?></td>
-                          <td><?php echo $k->alamat ?></td>
-                          <td><?php echo $k->tanggallahir ?></td>
-                          <td><?php echo $k->jk ?></td>
-                          <td><?php echo $k->telp ?></td>
+                          <td><?php echo $p->nomortiket ?></td>
+                          <td><?php echo $p->idrutekereta ?></td>
+                          <td><?php echo $p->namapemesan ?></td>
+                          <td><?php echo $p->email ?></td>
+                          <td><?php echo $p->alamat ?></td>
                           <td>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updatedatauser<?php echo $k->iduser ?>">Ubah</button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletedatauser<?php echo $k->iduser ?>">Hapus</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletedatapemesananker<?php echo $p->idpemesananker ?>">Hapus</button>
                           </td>
                         </tr>
                       <?php } ?>
@@ -244,130 +239,28 @@
                   </div>
                 </div>
 
-                <!-- Modal Add User -->
-                <div class="modal fade" id="adddatauser" tabindex="-1" role="dialog" aria-labelledby="adddatauserLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="adddatauserLabel" style="color: black;">Tambah Data User</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      
-                      <form action="<?php echo base_url(). 'admin/tambahuser'; ?>" method="post">
-                        <div class="modal-body">
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Nama User</b></p>
-                            <input type="text" class="form-control" id="namauser" name="namauser">
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Username</b></p>
-                            <input type="text" class="form-control" id="username" name="username">
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Password</b></p>
-                            <input type="password" class="form-control" id="password" name="password">
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Alamat</b></p>
-                            <textarea class="form-control" rows="3" name="alamat"></textarea>
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Tanggal Lahir</b></p>
-                            <input type="date" class="form-control" name="tanggallahir" id="tanggallahir">
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Jenis Kelamin</b></p>
-                            <input type="radio" name="jk" id="jk" value="l"> Laki-laki
-                            <input type="radio" name="jk" id="jk" value="p"> Perempuan
-                            <br>
-                          </div>
-                          <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>No Telephone</b></p>
-                            <input type="number" class="form-control" id="telp" name="telp">
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                          <input class="btn btn-success" type="submit" value="Tambah">
-                        </div>
-                        </td>
-                        </div>
-                      </form>
-                      
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Modal Hapus Petugas -->
-                <?php foreach($datauser as $p){ ?>
-                  <div class="modal fade" id="deletedatauser<?php echo $p->iduser ?>" tabindex="-1" role="dialog" aria-labelledby="adddatauserLabel" aria-hidden="true">
+                <!-- Modal Hapus pemesananker -->
+                <?php foreach($datapmsnker as $p){ ?>
+                  <div class="modal fade" id="deletedatapemesananker<?php echo $p->idpemesananker ?>" tabindex="-1" role="dialog" aria-labelledby="adddatapemesanankerLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="adddatauserLabel" style="color: black;">Hapus Data User</h5>
+                          <h5 class="modal-title" id="adddatapetugasLabel" style="color: black;">Hapus Data Pemesan</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
                         
-                          <form action="<?php echo base_url().'admin/hapususer'?>" method="post">
+                          <form action="<?php echo base_url().'admin/hapuspmsnker'?>" method="post">
                             <div class="modal-body">
-                                <p>Anda yakin ingin menghapus <b><?php echo $p->namauser;?></b>?</p>
+                                <p>Anda yakin ingin menghapus data pemesan dengan ID <b><?php echo $p->nomortiket;?></b>?</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                <?php echo anchor('admin/hapususer/'.$p->iduser,'<button type="button" class="btn btn-danger">Hapus</button>'); ?>
+                                <?php echo anchor('admin/hapuspmsnker/'.$p->idpemesananker,'<button type="button" class="btn btn-danger">Hapus</button>'); ?>
                             </div>
                           </form>
                         
-                      </div>
-                    </div>
-                  </div>
-                <?php } ?>
-
-                <?php foreach($datauser as $p){ ?>
-                  <div class="modal fade" id="updatedatauser<?php echo $p->iduser ?>" tabindex="-1" role="dialog" aria-labelledby="updatedatauserLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="updatedatauserLabel" style="color: black;">Ubah Data User</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-
-                        <form action="<?php echo base_url(). 'admin/updateuser'; ?>" method="post">
-                          <div class="modal-body">
-                            <div class="form-group">
-                              <p style="color: black; margin-bottom: -0.3%;"><b>Nama User</b></p>
-                              <input type="hidden" class="form-control" id="iduser" name="iduser" value="<?php echo $p->iduser ?>">
-                              <input type="text" class="form-control" id="namauser" name="namauser" value="<?php echo $p->namauser ?>">
-                            </div>
-                            <div class="form-group">
-                              <p style="color: black; margin-bottom: -0.3%;"><b>Username</b></p>
-                              <input type="text" class="form-control" id="username" name="username" value="<?php echo $p->username ?>">
-                            </div>
-                            <div class="form-group">
-                              <p style="color: black; margin-bottom: -0.3%;"><b>Alamat</b></p>
-                              <input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $p->alamat ?>">
-                            </div>
-                            <div class="form-group">
-                              <p style="color: black; margin-bottom: -0.3%;"><b>Tanggal Lahir</b></p>
-                              <input type="date" class="form-control" name="tanggallahir" id="tanggallahir" value="<?php echo $p->tanggallahir ?>">
-                            </div>
-                            <div class="form-group">
-                              <p style="color: black; margin-bottom: -0.3%;"><b>No Telphone</b></p>
-                              <input type="number" class="form-control" id="telp" name="telp" value="<?php echo $p->telp ?>">
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                              <input class="btn btn-success" type="submit" value="Ubah">
-                          </div>
-                        </form>
-
                       </div>
                     </div>
                   </div>
