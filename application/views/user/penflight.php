@@ -248,16 +248,16 @@
                   <hr style="margin-bottom: -2%; margin-top: -3%;">
                   <div class="card-body">
                     <p><b>Punya Kode Vocher?</b></p>
-                    <form action="<?= base_url('user/penflight'); ?>" name="diskon" method="POST">
-                      <input type="text" class="form-control" name="kodediskon">
-                      <button type="submit" class="btn btn-primary mt-2 mb-1 float-right">Gunakan</button>
-                    </form>
+                    <?php echo form_open('user/penflight') ?>
+                      <input type="text" class="form-control" name="kodediskonpes" id="input-diskon">
+                      <button type="button" class="btn btn-primary mt-2 mb-1 float-right" id="submit-code">Gunakan</button>
+                    <?php echo form_close() ?>
                   </div>
                   <div class="card-footer card-header">
                     <p style="margin-bottom: -0.5%;">Total Harga dari <b><?= $jmlpenumpang ?> Orang</b></p>
                   </div>
                   <div class="card-body text-right">
-                    <?php
+                    <!-- <?php
                       foreach($diskonpesawat as $k){ 
                         $discount_percent = $k->persendiskon;
                         $harga_awal = $info->harga*$jmlpenumpang;
@@ -273,8 +273,8 @@
                       <li>Harga Normal: <del><?php formatDigits($harga_awal); ?></del></li>
                       <li>Diskon: <?php echo $discount_percent . ' %'; ?></li>
                       <li>Anda Hemat: <?php formatDigits($discount_amount); ?></li>
-                    </ul>
-                    <b style="color: orange;">Rp <?php formatDigits($discount_price); ?></b>
+                    </ul> -->
+                    <b style="color: orange;">Rp <?php echo number_format($info->harga*$jmlpenumpang , 0,',','.') ?></b>
                   </div>
                 </div>
               </div>
@@ -344,3 +344,22 @@
 </body>
 
 </html>
+
+<script type="text/javascript">
+  $('#submit-code').click(function(){
+    console.log('test');
+  })
+  $('#submit-code').click(function(){
+    var kodediskon = $('#input-diskon').val();
+    console.log('click');
+    $.ajax({
+      url: "user/getdiskonpes",
+      method : "post",
+      data : {
+        keyword : kodediskon
+      },
+      success: function(result){
+        console.log(result)
+    }});
+  })
+</script>

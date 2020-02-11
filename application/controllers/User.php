@@ -59,12 +59,14 @@ class User extends CI_Controller {
 		$data['info'] = $this->mflight->getrutepesawat($idrutepesawat)->row();
 		$data['idrutepesawat'] = $idrutepesawat;
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-		$kodediskon = $this->input->get('kodediskon');
-		$getkodediskon = $this->mdiskonpes->getkodediskon();
-		$diskon = [
-			'kodediskon' => $kodediskon
-		];
-		$data['diskonpesawat'] = $this->mdiskonpes->searchdiskon($diskon);
+		// $kodediskon = $this->input->get('kodediskon');
+		// $getkodediskon = $this->mdiskonpes->getkodediskon();
+		// $diskon = [
+		// 	'kodediskon' => $kodediskon
+		// ];
+		// $data['diskonpesawat'] = $this->mdiskonpes->searchdiskon($diskon);
+		$keyword = $this->input->post('keyword');
+		$data['diskonpesawat'] = $this->mdiskonpes->getkeyword($keyword);
 
 		$this->load->view('user/penflight', $data);
 	}
@@ -178,6 +180,14 @@ class User extends CI_Controller {
             $this->session->set_flashdata('pesan', 'Bukti pembayaran anda akan terkonfirmasi maksimal 12 jam kemudian.');
             redirect('user/pagekonfirmasipes');
         }
+	}
+
+	public function caridiskonpes()
+	{
+		// $keyword = $this->input->post('keyword');
+		// $data['diskonpesawat'] = $this->mdiskonpes->getkeyword($keyword);
+
+		// $this->load->view('user/penflight', $data);
 	}
 
 	public function trains()

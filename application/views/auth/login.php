@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Agentiket.com - Login</title>
+  <title>Agentiket.com - Masuk</title>
   <link rel="icon" href="<?=base_url('assets/')?>img/logo.png" type="image/png">
   <!-- Custom fonts for this template-->
   <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -55,11 +55,11 @@
                     </button>
                   </form>
                   <hr>
-                  <div class="text-center">
+                  <!-- <div class="text-center">
                     <a class="small" href="forgot-password.html">Forgot Password?</a>
-                  </div>
+                  </div> -->
                   <div class="text-center">
-                    <a class="small" href="<?= base_url('auth/registration'); ?>">Create an Account!</a>
+                    <a class="small" href="<?= base_url('auth/registration'); ?>">Belum Punya Akun? Daftar Akun.</a>
                   </div>
                 </div>
               </div>

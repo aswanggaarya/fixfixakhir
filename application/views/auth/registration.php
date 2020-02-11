@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Agentiket.com - Registration</title>
+  <title>Agentiket.com - Registrasi</title>
   <link rel="icon" href="<?=base_url('assets/')?>img/logo.png" type="image/png">
   <!-- Custom fonts for this template-->
   <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -31,11 +31,11 @@
           <div class="col-lg">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                <h1 class="h4 text-gray-900 mb-4">Registrasi Akun</h1>
               </div>
               <form class="user" method="post" action="<?= base_url('auth/registration'); ?>">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id="namapenumpang" name="namapenumpang" placeholder="Full Name" value="<?= set_value('namapenumpang'); ?>">
+                  <input type="text" class="form-control form-control-user" id="namapenumpang" name="namapenumpang" placeholder="Nama" value="<?= set_value('namapenumpang'); ?>">
                   <?= form_error('namapenumpang', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
                 <div class="form-group">
@@ -48,15 +48,15 @@
                     <?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="Repeat Password">
+                    <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="Ulangi Password">
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id="alamat" name="alamat" placeholder="Address" value="<?= set_value('alamat'); ?>">
+                  <input type="text" class="form-control form-control-user" id="alamat" name="alamat" placeholder="Alamat" value="<?= set_value('alamat'); ?>">
                   <?= form_error('alamat', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
                 <div class="form-group">
-                  <p style="color: black; padding-left: 3%;">Date of birth</p>
+                  <p style="color: black; padding-left: 3%;">Tanggal Lahir</p>
                   <input type="date" class="form-control form-control-user" id="tanggallahir" name="tanggallahir" placeholder="Tanggal Lahir" value="<?= set_value('tanggallahir'); ?>">
                   <?= form_error('tanggallahir', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
@@ -68,20 +68,17 @@
                   <?= form_error('jk', '<small class="text-danger">', '</small>'); ?>
                 </div>
                 <div class="form-group">
-                  <p style="color: black; padding-left: 3%;">Mobile Number</p>
+                  <p style="color: black; padding-left: 3%;">Nomor Telephone</p>
                   <input type="text" class="form-control form-control-user" id="telp" name="telp" placeholder="e.g.: 082357111317" value="<?= set_value('telp'); ?>">
                   <?= form_error('telp', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
                 <button type="submit" class="btn btn-primary btn-user btn-block">
-                  Register Account
+                  Daftar
                 </button>
               </form>
               <hr>
               <div class="text-center">
-                <a class="small" href="forgot-password.html">Forgot Password?</a>
-              </div>
-              <div class="text-center">
-                <a class="small" href="<?= base_url('auth/'); ?>">Already have an account? Login!</a>
+                <a class="small" href="<?= base_url('auth/'); ?>">Sudah Punya Akun? Masuk.</a>
               </div>
             </div>
           </div>

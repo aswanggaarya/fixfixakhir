@@ -52,11 +52,11 @@ class Auth extends CI_Controller {
 				$this->session->set_userdata($data);
 				redirect('user/flights');
 			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!</div>');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Anda Salah!</div>');
 				redirect('auth');
 			}
 		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username is not registered!</div>');
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username Ini Tidak Terdaftar!</div>');
 			redirect('auth');
 		}
 	}
@@ -93,7 +93,7 @@ class Auth extends CI_Controller {
 				'telp' => htmlspecialchars($this->input->post('telp', true))
 			];
 			$this->db->insert('user', $data);
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! your account has been created. Please Login</div>');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat! Akun Anda Telah Dibuat. Silahkan Masuk</div>');
 			redirect('auth');
 		}
 	}
@@ -101,7 +101,7 @@ class Auth extends CI_Controller {
 	public function logout()
 	{
 		$this->session->unset_userdata('username');
-		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out!</div>');
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda Telah Berhasil Keluar!</div>');
 		redirect('auth');
 	}
 }

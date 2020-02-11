@@ -259,27 +259,33 @@
                         <div class="modal-body">
                           <div class="form-group">
                             <p style="color: black; margin-bottom: -0.3%;"><b>Rute Awal</b></p>
-                            <input type="text" class="form-control" id="ruteawal" name="ruteawal">
+                            <input type="text" class="form-control" id="ruteawal" name="ruteawal" value="<?= set_value('ruteawal'); ?>">
+                            <?= form_error('ruteawal', '<small class="text-danger pl-3">', '</small>'); ?>
                           </div>
                           <div class="form-group">
                             <p style="color: black; margin-bottom: -0.3%;"><b>Rute Akhir</b></p>
-                            <input type="text" class="form-control" id="ruteakhir" name="ruteakhir">
+                            <input type="text" class="form-control" id="ruteakhir" name="ruteakhir" value="<?= set_value('ruteakhir'); ?>">
+                            <?= form_error('ruteakhir', '<small class="text-danger pl-3">', '</small>'); ?>
                           </div>
                           <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Berangkat</b></p>
-                            <input type="time" class="form-control" id="jamberangkat" name="jamberangkat">
+                            <p style="color: black; margin-bottom: -0.3%;"><b>Jam Berangkat</b></p>
+                            <input type="time" class="form-control" id="jamberangkat" name="jamberangkat" value="<?= set_value('jamberangkat'); ?>">
+                            <?= form_error('jamberangkat', '<small class="text-danger pl-3">', '</small>'); ?>
                           </div>
                           <div class="form-group">
-                            <p style="color: black; margin-bottom: -0.3%;"><b>Tiba</b></p>
-                            <input type="time" class="form-control" id="jamtiba" name="jamtiba">
+                            <p style="color: black; margin-bottom: -0.3%;"><b>Jam Tiba</b></p>
+                            <input type="time" class="form-control" id="jamtiba" name="jamtiba" value="<?= set_value('jamtiba'); ?>">
+                            <?= form_error('jamtiba', '<small class="text-danger pl-3">', '</small>'); ?>
                           </div>
                           <div class="form-group">
                             <p style="color: black; margin-bottom: -0.3%;"><b>Maskapai</b></p>
-                            <input type="text" class="form-control" id="maskapai" name="maskapai">
+                            <input type="text" class="form-control" id="maskapai" name="maskapai" value="<?= set_value('maskapai'); ?>">
+                            <?= form_error('maskapai', '<small class="text-danger pl-3">', '</small>'); ?>
                           </div>
                           <div class="form-group">
                             <p style="color: black; margin-bottom: -0.3%;"><b>Harga</b></p>
-                            <input type="number" class="form-control" id="harga" name="harga">
+                            <input type="number" class="form-control" id="harga" name="harga" value="<?= set_value('harga'); ?>">
+                            <?= form_error('harga', '<small class="text-danger pl-3">', '</small>'); ?>
                           </div>
                         </div>
                         <div class="modal-footer">

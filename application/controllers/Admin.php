@@ -20,7 +20,8 @@ class Admin extends CI_Controller {
 	 */
 	// __construct slalu dijalankan setiap auth.php dipanggil
 	public function __construct(){
-		parent::__construct();		
+		parent::__construct();
+		$this->load->library('form_validation');		
 		$this->load->model('m_petugas');
 		$this->load->model('m_rutekereta');
 		$this->load->model('m_rutepesawat');
@@ -175,24 +176,52 @@ class Admin extends CI_Controller {
 
 	public function tambahpesawat()
 	{
-		$ruteawal = htmlspecialchars($this->input->post('ruteawal', true));
-		$ruteakhir = htmlspecialchars($this->input->post('ruteakhir', true));
-		$jamberangkat = htmlspecialchars($this->input->post('jamberangkat', true));
-		$jamtiba = htmlspecialchars($this->input->post('jamtiba', true));
-		$maskapai = htmlspecialchars($this->input->post('maskapai', true));
-		$harga = htmlspecialchars($this->input->post('harga', true));
- 
-		$data = array(
-			'ruteawal' => $ruteawal,
-			'ruteakhir' => $ruteakhir,
-			'jamberangkat' => $jamberangkat,
-			'jamtiba' => $jamtiba,
-			'maskapai' => $maskapai,
-			'harga' => $harga
-			);
-		$this->m_rutekereta->input_data($data,'rutepesawat');
-		redirect('admin/datarutepesawat');
+		$this->form_validation->set_rules('ruteawal', 'Rute Awal', 'required');
+		$this->form_validation->set_rules('ruteakhir', 'Rute Akhir', 'required|differs[ruteawal]');
+		$this->form_validation->set_rules('jamberangkat', 'Jam Berangkat', 'required');
+		$this->form_validation->set_rules('jamtiba', 'Jam Tiba', 'required');
+		$this->form_validation->set_rules('maskapai', 'Maskapai', 'required');
+		$this->form_validation->set_rules('harga', 'Harga', 'required');
+
+		if ($this->form_validation->run() == false) {
+			echo "<script>
+			    alert('Rute Akhir Anda Sama Dengan Rute Awal!');
+			    window.location.href = 'datarutepesawat';
+			</script>";
+		} else {
+			$data = [
+				'ruteawal' => htmlspecialchars($this->input->post('ruteawal', true)),
+				'ruteakhir' => htmlspecialchars($this->input->post('ruteakhir', true)),
+				'jamberangkat' => htmlspecialchars($this->input->post('jamberangkat', true)),
+				'jamtiba' => htmlspecialchars($this->input->post('jamtiba', true)),
+				'maskapai' => htmlspecialchars($this->input->post('maskapai', true)),
+				'harga' => htmlspecialchars($this->input->post('harga', true))
+			];
+			$this->db->insert('rutepesawat', $data);
+			redirect('admin/datarutepesawat');
+		}
 	}
+
+	// public function tambahpesawat()
+	// {
+	// 	$ruteawal = htmlspecialchars($this->input->post('ruteawal', true));
+	// 	$ruteakhir = htmlspecialchars($this->input->post('ruteakhir', true));
+	// 	$jamberangkat = htmlspecialchars($this->input->post('jamberangkat', true));
+	// 	$jamtiba = htmlspecialchars($this->input->post('jamtiba', true));
+	// 	$maskapai = htmlspecialchars($this->input->post('maskapai', true));
+	// 	$harga = htmlspecialchars($this->input->post('harga', true));
+ 
+	// 	$data = array(
+	// 		'ruteawal' => $ruteawal,
+	// 		'ruteakhir' => $ruteakhir,
+	// 		'jamberangkat' => $jamberangkat,
+	// 		'jamtiba' => $jamtiba,
+	// 		'maskapai' => $maskapai,
+	// 		'harga' => $harga
+	// 		);
+	// 	$this->m_rutekereta->input_data($data,'rutepesawat');
+	// 	redirect('admin/datarutepesawat');
+	// }
 
 	public function hapuspesawat($idrutepesawat){
 		$where = array('idrutepesawat' => $idrutepesawat);

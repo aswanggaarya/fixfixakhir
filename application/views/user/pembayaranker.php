@@ -186,7 +186,7 @@
                     
                     <div class="card-footer" style="margin-bottom: -1%;">
                       <p class="mt-2 text-center" style="color: #434343; margin-bottom: -0.3%"><img src="<?=base_url('assets/')?>img/bri.png" width="50" height="35"> <small>a/n PT.Agen Tiket Indonesia</small> <b>766 776 677 666</b></p>
-                      <p class="text-center mt-4" style="margin-bottom: -1%;">Jika sudah melakukan pembayaran, <a href="<?=base_url('user/konfirmasipes');?>">Klik Disini</a></p>
+                      <p class="text-center mt-4" style="margin-bottom: -1%;">Jika sudah melakukan pembayaran, <a href="<?=base_url('user/pagekonfirmasiker');?>">Klik Disini</a></p>
                     </div>
                   </div>
                 </div>

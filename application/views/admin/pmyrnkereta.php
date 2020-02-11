@@ -229,7 +229,15 @@
                               <img width="100%" src="<?=base_url('assets/bukti/'.$k->bukti)?>">
                             </a>
                           </td>
-                          <td><?php echo $k->status ?></td>
+                          <td>
+                            <?php if ($k->status === '0'):?>
+                              <p>Belum Dibayar</p>
+                            <?php elseif ($k->status === '1'):?>
+                              <p>Belum Dikonfirmasi</p>
+                            <?php elseif ($k->status === '2'):?>
+                              <p>Sudah Dibayar</p>
+                            <?php endif ?>
+                          </td>
                           <td>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletedatapembayaranker<?php echo $k->idpembayaranker ?>">Hapus</button>
                           </td>
